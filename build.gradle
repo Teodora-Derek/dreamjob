@@ -1,0 +1,127 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.4.2'
+    id 'io.spring.dependency-management' version '1.1.7'
+
+    // JOOQ Plugin
+    id 'nu.studer.jooq' version '7.1'
+}
+
+group = 'com.workplace'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Database driver for jOOQ
+    jooqGenerator "org.postgresql:postgresql:42.7.4"
+
+    // Lombok
+    compileOnly "org.projectlombok:lombok"
+    annotationProcessor "org.projectlombok:lombok"
+
+    // Spring dependencies
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-actuator"
+    implementation "org.springframework.boot:spring-boot-starter-hateoas"
+    runtimeOnly "org.springframework.boot:spring-boot-starter-validation"
+
+    // Database dependencies
+    implementation "org.springframework.boot:spring-boot-starter-jdbc"
+    implementation "com.zaxxer:HikariCP"
+    implementation "org.liquibase:liquibase-core"
+    implementation "org.jooq:jooq:3.19.17"
+    runtimeOnly "org.postgresql:postgresql:42.7.4"
+
+    // Swagger
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
+
+    // Spring Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // JWT support
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5' // or jjwt-gson, jjwt-orgjson
+
+    // Test
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.junit.jupiter:junit-jupiter-api"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine"
+    testImplementation "org.mockito:mockito-junit-jupiter"
+    testImplementation "org.springframework.boot:spring-boot-starter-aop"
+    testImplementation 'org.testcontainers:testcontainers:1.17.6'
+    testImplementation "org.testcontainers:postgresql:1.17.6"
+}
+
+processResources {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+    from('src/main/resources') {
+        include '**/*.p12'
+    }
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+jooq {
+    configurations {
+        main {
+            // We don't want jOOQ to run on every compile.
+            generateSchemaSourceOnCompilation = false
+            generationTool {
+                jdbc {
+                    driver = 'org.postgresql.Driver'
+                    url = 'jdbc:postgresql://127.0.0.1:5432/dreamjob'
+                    user = 'postgres'
+                    password = 'admin'
+                    properties {
+                        property {
+                            // No need for SSL on localhost when generating sources, so it's ok to suppress the warnings
+                            key = 'useSSL'
+                            value = 'false'
+                        }
+                    }
+                }
+                generator {
+                    name = 'org.jooq.codegen.DefaultGenerator'
+
+                    database {
+                        name = 'org.jooq.meta.postgres.PostgresDatabase'
+                        inputSchema = 'public'
+                        outputSchemaToDefault = true
+                        excludes = 'DATABASECHANGELOG|DATABASECHANGELOGLOCK'
+                    }
+
+                    generate {
+                        relations = false
+                        deprecated = false
+                        records = true
+                        pojos = true
+                        daos = true
+                        springAnnotations = true
+                        javaTimeTypes = true
+                        fluentSetters = true
+                        pojosEqualsAndHashCode = true
+                        constructorPropertiesAnnotation = true
+                        generatedAnnotation = true
+                    }
+
+                    target {
+                        packageName = 'com.dreamjob.db.jooq'
+                        directory = 'src/generated-db-entities/java/'
+                    }
+                }
+            }
+        }
+    }
+}
