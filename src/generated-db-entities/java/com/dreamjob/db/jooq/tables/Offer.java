@@ -20,7 +20,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row8;
+import org.jooq.Row7;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -70,14 +70,9 @@ public class Offer extends TableImpl<OfferRecord> {
     public final TableField<OfferRecord, Integer> TRADER_ID = createField(DSL.name("trader_id"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>offer.profession_id</code>.
+     * The column <code>offer.labor_cost</code>.
      */
-    public final TableField<OfferRecord, Integer> PROFESSION_ID = createField(DSL.name("profession_id"), SQLDataType.INTEGER.nullable(false), this, "");
-
-    /**
-     * The column <code>offer.price_per_unit</code>.
-     */
-    public final TableField<OfferRecord, BigDecimal> PRICE_PER_UNIT = createField(DSL.name("price_per_unit"), SQLDataType.NUMERIC(10, 2).nullable(false), this, "");
+    public final TableField<OfferRecord, BigDecimal> LABOR_COST = createField(DSL.name("labor_cost"), SQLDataType.NUMERIC(10, 2).nullable(false), this, "");
 
     /**
      * The column <code>offer.description</code>.
@@ -149,11 +144,10 @@ public class Offer extends TableImpl<OfferRecord> {
 
     @Override
     public List<ForeignKey<OfferRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.OFFER__FK_OFFER_TRADER_DETAILS_ID, Keys.OFFER__FK_OFFER_PROFESSION_TYPE_ID);
+        return Arrays.asList(Keys.OFFER__FK_OFFER_TRADER_DETAILS_ID);
     }
 
     private transient TraderDetails _traderDetails;
-    private transient ProfessionType _professionType;
 
     /**
      * Get the implicit join path to the <code>public.trader_details</code>
@@ -164,17 +158,6 @@ public class Offer extends TableImpl<OfferRecord> {
             _traderDetails = new TraderDetails(this, Keys.OFFER__FK_OFFER_TRADER_DETAILS_ID);
 
         return _traderDetails;
-    }
-
-    /**
-     * Get the implicit join path to the <code>public.profession_type</code>
-     * table.
-     */
-    public ProfessionType professionType() {
-        if (_professionType == null)
-            _professionType = new ProfessionType(this, Keys.OFFER__FK_OFFER_PROFESSION_TYPE_ID);
-
-        return _professionType;
     }
 
     @Override
@@ -204,11 +187,11 @@ public class Offer extends TableImpl<OfferRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row8 type methods
+    // Row7 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row8<Integer, Integer, Integer, BigDecimal, String, BigDecimal, LocalDateTime, LocalDateTime> fieldsRow() {
-        return (Row8) super.fieldsRow();
+    public Row7<Integer, Integer, BigDecimal, String, BigDecimal, LocalDateTime, LocalDateTime> fieldsRow() {
+        return (Row7) super.fieldsRow();
     }
 }

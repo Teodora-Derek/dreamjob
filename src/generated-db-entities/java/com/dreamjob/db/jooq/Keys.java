@@ -57,7 +57,6 @@ public class Keys {
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
-    public static final ForeignKey<OfferRecord, ProfessionTypeRecord> OFFER__FK_OFFER_PROFESSION_TYPE_ID = Internal.createForeignKey(Offer.OFFER, DSL.name("fk_offer_profession_type_id"), new TableField[] { Offer.OFFER.PROFESSION_ID }, Keys.PROFESSION_TYPE_PKEY, new TableField[] { ProfessionType.PROFESSION_TYPE.ID }, true);
     public static final ForeignKey<OfferRecord, TraderDetailsRecord> OFFER__FK_OFFER_TRADER_DETAILS_ID = Internal.createForeignKey(Offer.OFFER, DSL.name("fk_offer_trader_details_id"), new TableField[] { Offer.OFFER.TRADER_ID }, Keys.TRADER_DETAILS_PKEY, new TableField[] { TraderDetails.TRADER_DETAILS.ID }, true);
     public static final ForeignKey<OfferResourceRecord, OfferRecord> OFFER_RESOURCE__FK_OFFER_RESOURCE_OFFER_ID = Internal.createForeignKey(OfferResource.OFFER_RESOURCE, DSL.name("fk_offer_resource_offer_id"), new TableField[] { OfferResource.OFFER_RESOURCE.OFFER_ID }, Keys.OFFER_PKEY, new TableField[] { Offer.OFFER.ID }, true);
     public static final ForeignKey<OfferResourceRecord, ResourceRecord> OFFER_RESOURCE__FK_OFFER_RESOURCE_RESOURCE_ID = Internal.createForeignKey(OfferResource.OFFER_RESOURCE, DSL.name("fk_offer_resource_resource_id"), new TableField[] { OfferResource.OFFER_RESOURCE.RESOURCE_ID }, Keys.RESOURCE_PKEY, new TableField[] { Resource.RESOURCE.ID }, true);

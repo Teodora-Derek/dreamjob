@@ -29,8 +29,7 @@ public class Offer implements Serializable {
 
     private Integer       id;
     private Integer       traderId;
-    private Integer       professionId;
-    private BigDecimal    pricePerUnit;
+    private BigDecimal    laborCost;
     private String        description;
     private BigDecimal    totalPrice;
     private LocalDateTime createdOn;
@@ -41,20 +40,18 @@ public class Offer implements Serializable {
     public Offer(Offer value) {
         this.id = value.id;
         this.traderId = value.traderId;
-        this.professionId = value.professionId;
-        this.pricePerUnit = value.pricePerUnit;
+        this.laborCost = value.laborCost;
         this.description = value.description;
         this.totalPrice = value.totalPrice;
         this.createdOn = value.createdOn;
         this.updatedOn = value.updatedOn;
     }
 
-    @ConstructorProperties({ "id", "traderId", "professionId", "pricePerUnit", "description", "totalPrice", "createdOn", "updatedOn" })
+    @ConstructorProperties({ "id", "traderId", "laborCost", "description", "totalPrice", "createdOn", "updatedOn" })
     public Offer(
         Integer       id,
         Integer       traderId,
-        Integer       professionId,
-        BigDecimal    pricePerUnit,
+        BigDecimal    laborCost,
         String        description,
         BigDecimal    totalPrice,
         LocalDateTime createdOn,
@@ -62,8 +59,7 @@ public class Offer implements Serializable {
     ) {
         this.id = id;
         this.traderId = traderId;
-        this.professionId = professionId;
-        this.pricePerUnit = pricePerUnit;
+        this.laborCost = laborCost;
         this.description = description;
         this.totalPrice = totalPrice;
         this.createdOn = createdOn;
@@ -101,32 +97,17 @@ public class Offer implements Serializable {
     }
 
     /**
-     * Getter for <code>offer.profession_id</code>.
+     * Getter for <code>offer.labor_cost</code>.
      */
-    public Integer getProfessionId() {
-        return this.professionId;
+    public BigDecimal getLaborCost() {
+        return this.laborCost;
     }
 
     /**
-     * Setter for <code>offer.profession_id</code>.
+     * Setter for <code>offer.labor_cost</code>.
      */
-    public Offer setProfessionId(Integer professionId) {
-        this.professionId = professionId;
-        return this;
-    }
-
-    /**
-     * Getter for <code>offer.price_per_unit</code>.
-     */
-    public BigDecimal getPricePerUnit() {
-        return this.pricePerUnit;
-    }
-
-    /**
-     * Setter for <code>offer.price_per_unit</code>.
-     */
-    public Offer setPricePerUnit(BigDecimal pricePerUnit) {
-        this.pricePerUnit = pricePerUnit;
+    public Offer setLaborCost(BigDecimal laborCost) {
+        this.laborCost = laborCost;
         return this;
     }
 
@@ -211,17 +192,11 @@ public class Offer implements Serializable {
         }
         else if (!traderId.equals(other.traderId))
             return false;
-        if (professionId == null) {
-            if (other.professionId != null)
+        if (laborCost == null) {
+            if (other.laborCost != null)
                 return false;
         }
-        else if (!professionId.equals(other.professionId))
-            return false;
-        if (pricePerUnit == null) {
-            if (other.pricePerUnit != null)
-                return false;
-        }
-        else if (!pricePerUnit.equals(other.pricePerUnit))
+        else if (!laborCost.equals(other.laborCost))
             return false;
         if (description == null) {
             if (other.description != null)
@@ -256,8 +231,7 @@ public class Offer implements Serializable {
         int result = 1;
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         result = prime * result + ((this.traderId == null) ? 0 : this.traderId.hashCode());
-        result = prime * result + ((this.professionId == null) ? 0 : this.professionId.hashCode());
-        result = prime * result + ((this.pricePerUnit == null) ? 0 : this.pricePerUnit.hashCode());
+        result = prime * result + ((this.laborCost == null) ? 0 : this.laborCost.hashCode());
         result = prime * result + ((this.description == null) ? 0 : this.description.hashCode());
         result = prime * result + ((this.totalPrice == null) ? 0 : this.totalPrice.hashCode());
         result = prime * result + ((this.createdOn == null) ? 0 : this.createdOn.hashCode());
@@ -271,8 +245,7 @@ public class Offer implements Serializable {
 
         sb.append(id);
         sb.append(", ").append(traderId);
-        sb.append(", ").append(professionId);
-        sb.append(", ").append(pricePerUnit);
+        sb.append(", ").append(laborCost);
         sb.append(", ").append(description);
         sb.append(", ").append(totalPrice);
         sb.append(", ").append(createdOn);

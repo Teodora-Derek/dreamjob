@@ -4,16 +4,18 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="202503161705_create_resource_table" author="Teodora Derekyovska">
+    <changeSet id="202503161535_create_profession_table" author="Teodora Derekyovska">
         <sql dbms="postgresql" splitStatements="true" stripComments="true">
         <![CDATA[
-            CREATE TABLE IF NOT EXISTS resource (
+            CREATE TABLE IF NOT EXISTS profession (
                 id SERIAL PRIMARY KEY,
-                name TEXT NOT NULL,
-                unit TEXT NOT NULL, -- e.g., kg, liters, pieces
+                profession_name TEXT NOT NULL,
+                description TEXT NULL,
                 created_on TIMESTAMP(3) WITHOUT TIME ZONE NOT NULL,
                 updated_on TIMESTAMP(3) WITHOUT TIME ZONE NOT NULL
             );
+
+            CREATE INDEX IF NOT EXISTS idx_profession_profession_name on profession(profession_name);
         ]]>
         </sql>
     </changeSet>

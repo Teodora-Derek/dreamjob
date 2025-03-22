@@ -12,7 +12,9 @@
                 user_id INTEGER NOT NULL,
                 profession_id INTEGER NULL,
                 mobile_number TEXT NULL,
-                description TEXT NULL
+                description TEXT NULL,
+                created_on TIMESTAMP(3) WITHOUT TIME ZONE NOT NULL,
+                updated_on TIMESTAMP(3) WITHOUT TIME ZONE NOT NULL
             );
 
             ALTER TABLE IF EXISTS trader_details
@@ -22,13 +24,13 @@
                 ON DELETE CASCADE;
 
             ALTER TABLE IF EXISTS trader_details
-                ADD CONSTRAINT fk_trader_details_profession_type_id
+                ADD CONSTRAINT fk_trader_details_profession_id
                 FOREIGN KEY (profession_id)
-                REFERENCES profession_type(id)
+                REFERENCES profession(id)
                 ON DELETE SET NULL;
 
-            CREATE INDEX idx_trader_details_user_details_id ON trader_details(user_id);
-            CREATE INDEX idx_trader_details_profession_type_id ON trader_details(profession_id);
+            CREATE INDEX IF NOT EXISTS idx_trader_details_user_details_id ON trader_details(user_id);
+            CREATE INDEX IF NOT EXISTS idx_trader_details_profession_id ON trader_details(profession_id);
         ]]>
         </sql>
     </changeSet>

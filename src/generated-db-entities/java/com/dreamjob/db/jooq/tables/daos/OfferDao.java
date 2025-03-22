@@ -99,33 +99,18 @@ public class OfferDao extends DAOImpl<OfferRecord, com.dreamjob.db.jooq.tables.p
     }
 
     /**
-     * Fetch records that have <code>profession_id BETWEEN lowerInclusive AND
+     * Fetch records that have <code>labor_cost BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
-    public List<com.dreamjob.db.jooq.tables.pojos.Offer> fetchRangeOfProfessionId(Integer lowerInclusive, Integer upperInclusive) {
-        return fetchRange(Offer.OFFER.PROFESSION_ID, lowerInclusive, upperInclusive);
+    public List<com.dreamjob.db.jooq.tables.pojos.Offer> fetchRangeOfLaborCost(BigDecimal lowerInclusive, BigDecimal upperInclusive) {
+        return fetchRange(Offer.OFFER.LABOR_COST, lowerInclusive, upperInclusive);
     }
 
     /**
-     * Fetch records that have <code>profession_id IN (values)</code>
+     * Fetch records that have <code>labor_cost IN (values)</code>
      */
-    public List<com.dreamjob.db.jooq.tables.pojos.Offer> fetchByProfessionId(Integer... values) {
-        return fetch(Offer.OFFER.PROFESSION_ID, values);
-    }
-
-    /**
-     * Fetch records that have <code>price_per_unit BETWEEN lowerInclusive AND
-     * upperInclusive</code>
-     */
-    public List<com.dreamjob.db.jooq.tables.pojos.Offer> fetchRangeOfPricePerUnit(BigDecimal lowerInclusive, BigDecimal upperInclusive) {
-        return fetchRange(Offer.OFFER.PRICE_PER_UNIT, lowerInclusive, upperInclusive);
-    }
-
-    /**
-     * Fetch records that have <code>price_per_unit IN (values)</code>
-     */
-    public List<com.dreamjob.db.jooq.tables.pojos.Offer> fetchByPricePerUnit(BigDecimal... values) {
-        return fetch(Offer.OFFER.PRICE_PER_UNIT, values);
+    public List<com.dreamjob.db.jooq.tables.pojos.Offer> fetchByLaborCost(BigDecimal... values) {
+        return fetch(Offer.OFFER.LABOR_COST, values);
     }
 
     /**
