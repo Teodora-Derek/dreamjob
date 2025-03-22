@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="202503161730_create_offer_resource_table" author="Teodora Derekyovska">
+        <sql dbms="postgresql" splitStatements="true" stripComments="true">
+        <![CDATA[
+            CREATE TABLE IF NOT EXISTS offer_resource (
+                id SERIAL PRIMARY KEY,
+                offer_id INTEGER NOT NULL,
+                resource_id INTEGER NOT NULL,
+                quantity DECIMAL(10, 2) NOT NULL, -- Amount of this resource needed
+                unit_price DECIMAL(10, 2) NOT NULL, -- Price per unit
+                total_cost DECIMAL(10, 2) GENERATED ALWAYS AS (quantity * unit_price) STORED,
+                created_on TIMESTAMP(3) WITHOUT TIME ZONE NOT NULL,
+                updated_on TIMESTAMP(3) WITHOUT TIME ZONE NOT NULL
+            );
+
+            ALTER TABLE IF EXISTS offer_resource
+                ADD CONSTRAINT fk_offer_resource_offer_id
+                FOREIGN KEY (offer_id)
+                REFERENCES offer(id)
+                ON DELETE CASCADE;
+
+            ALTER TABLE IF EXISTS offer_resource
+                ADD CONSTRAINT fk_offer_resource_resource_id
+                FOREIGN KEY (resource_id)
+                REFERENCES resource(id)
+                ON DELETE CASCADE;
+            ]]>
+        </sql>
+    </changeSet>
+</databaseChangeLog>

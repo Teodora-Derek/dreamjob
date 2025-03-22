@@ -7,7 +7,6 @@ package com.dreamjob.db.jooq.tables.pojos;
 import java.beans.ConstructorProperties;
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 import javax.annotation.processing.Generated;
 
@@ -27,9 +26,12 @@ public class UserDetails implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private UUID          id;
+    private Integer       id;
     private String        username;
     private String        password;
+    private String        email;
+    private String        displayName;
+    private String        role;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
 
@@ -39,21 +41,30 @@ public class UserDetails implements Serializable {
         this.id = value.id;
         this.username = value.username;
         this.password = value.password;
+        this.email = value.email;
+        this.displayName = value.displayName;
+        this.role = value.role;
         this.createdOn = value.createdOn;
         this.updatedOn = value.updatedOn;
     }
 
-    @ConstructorProperties({ "id", "username", "password", "createdOn", "updatedOn" })
+    @ConstructorProperties({ "id", "username", "password", "email", "displayName", "role", "createdOn", "updatedOn" })
     public UserDetails(
-        UUID          id,
+        Integer       id,
         String        username,
         String        password,
+        String        email,
+        String        displayName,
+        String        role,
         LocalDateTime createdOn,
         LocalDateTime updatedOn
     ) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.email = email;
+        this.displayName = displayName;
+        this.role = role;
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
     }
@@ -61,14 +72,14 @@ public class UserDetails implements Serializable {
     /**
      * Getter for <code>user_details.id</code>.
      */
-    public UUID getId() {
+    public Integer getId() {
         return this.id;
     }
 
     /**
      * Setter for <code>user_details.id</code>.
      */
-    public UserDetails setId(UUID id) {
+    public UserDetails setId(Integer id) {
         this.id = id;
         return this;
     }
@@ -100,6 +111,51 @@ public class UserDetails implements Serializable {
      */
     public UserDetails setPassword(String password) {
         this.password = password;
+        return this;
+    }
+
+    /**
+     * Getter for <code>user_details.email</code>.
+     */
+    public String getEmail() {
+        return this.email;
+    }
+
+    /**
+     * Setter for <code>user_details.email</code>.
+     */
+    public UserDetails setEmail(String email) {
+        this.email = email;
+        return this;
+    }
+
+    /**
+     * Getter for <code>user_details.display_name</code>.
+     */
+    public String getDisplayName() {
+        return this.displayName;
+    }
+
+    /**
+     * Setter for <code>user_details.display_name</code>.
+     */
+    public UserDetails setDisplayName(String displayName) {
+        this.displayName = displayName;
+        return this;
+    }
+
+    /**
+     * Getter for <code>user_details.role</code>.
+     */
+    public String getRole() {
+        return this.role;
+    }
+
+    /**
+     * Setter for <code>user_details.role</code>.
+     */
+    public UserDetails setRole(String role) {
+        this.role = role;
         return this;
     }
 
@@ -160,6 +216,24 @@ public class UserDetails implements Serializable {
         }
         else if (!password.equals(other.password))
             return false;
+        if (email == null) {
+            if (other.email != null)
+                return false;
+        }
+        else if (!email.equals(other.email))
+            return false;
+        if (displayName == null) {
+            if (other.displayName != null)
+                return false;
+        }
+        else if (!displayName.equals(other.displayName))
+            return false;
+        if (role == null) {
+            if (other.role != null)
+                return false;
+        }
+        else if (!role.equals(other.role))
+            return false;
         if (createdOn == null) {
             if (other.createdOn != null)
                 return false;
@@ -182,6 +256,9 @@ public class UserDetails implements Serializable {
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         result = prime * result + ((this.username == null) ? 0 : this.username.hashCode());
         result = prime * result + ((this.password == null) ? 0 : this.password.hashCode());
+        result = prime * result + ((this.email == null) ? 0 : this.email.hashCode());
+        result = prime * result + ((this.displayName == null) ? 0 : this.displayName.hashCode());
+        result = prime * result + ((this.role == null) ? 0 : this.role.hashCode());
         result = prime * result + ((this.createdOn == null) ? 0 : this.createdOn.hashCode());
         result = prime * result + ((this.updatedOn == null) ? 0 : this.updatedOn.hashCode());
         return result;
@@ -194,6 +271,9 @@ public class UserDetails implements Serializable {
         sb.append(id);
         sb.append(", ").append(username);
         sb.append(", ").append(password);
+        sb.append(", ").append(email);
+        sb.append(", ").append(displayName);
+        sb.append(", ").append(role);
         sb.append(", ").append(createdOn);
         sb.append(", ").append(updatedOn);
 

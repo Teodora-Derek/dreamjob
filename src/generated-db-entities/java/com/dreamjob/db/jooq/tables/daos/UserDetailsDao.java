@@ -10,7 +10,6 @@ import com.dreamjob.db.jooq.tables.records.UserDetailsRecord;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import javax.annotation.processing.Generated;
 
@@ -32,7 +31,7 @@ import org.springframework.stereotype.Repository;
 )
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 @Repository
-public class UserDetailsDao extends DAOImpl<UserDetailsRecord, com.dreamjob.db.jooq.tables.pojos.UserDetails, UUID> {
+public class UserDetailsDao extends DAOImpl<UserDetailsRecord, com.dreamjob.db.jooq.tables.pojos.UserDetails, Integer> {
 
     /**
      * Create a new UserDetailsDao without any configuration
@@ -50,7 +49,7 @@ public class UserDetailsDao extends DAOImpl<UserDetailsRecord, com.dreamjob.db.j
     }
 
     @Override
-    public UUID getId(com.dreamjob.db.jooq.tables.pojos.UserDetails object) {
+    public Integer getId(com.dreamjob.db.jooq.tables.pojos.UserDetails object) {
         return object.getId();
     }
 
@@ -58,28 +57,28 @@ public class UserDetailsDao extends DAOImpl<UserDetailsRecord, com.dreamjob.db.j
      * Fetch records that have <code>id BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
-    public List<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchRangeOfId(UUID lowerInclusive, UUID upperInclusive) {
+    public List<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchRangeOfId(Integer lowerInclusive, Integer upperInclusive) {
         return fetchRange(UserDetails.USER_DETAILS.ID, lowerInclusive, upperInclusive);
     }
 
     /**
      * Fetch records that have <code>id IN (values)</code>
      */
-    public List<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchById(UUID... values) {
+    public List<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchById(Integer... values) {
         return fetch(UserDetails.USER_DETAILS.ID, values);
     }
 
     /**
      * Fetch a unique record that has <code>id = value</code>
      */
-    public com.dreamjob.db.jooq.tables.pojos.UserDetails fetchOneById(UUID value) {
+    public com.dreamjob.db.jooq.tables.pojos.UserDetails fetchOneById(Integer value) {
         return fetchOne(UserDetails.USER_DETAILS.ID, value);
     }
 
     /**
      * Fetch a unique record that has <code>id = value</code>
      */
-    public Optional<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchOptionalById(UUID value) {
+    public Optional<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchOptionalById(Integer value) {
         return fetchOptional(UserDetails.USER_DETAILS.ID, value);
     }
 
@@ -125,6 +124,65 @@ public class UserDetailsDao extends DAOImpl<UserDetailsRecord, com.dreamjob.db.j
      */
     public List<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchByPassword(String... values) {
         return fetch(UserDetails.USER_DETAILS.PASSWORD, values);
+    }
+
+    /**
+     * Fetch records that have <code>email BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchRangeOfEmail(String lowerInclusive, String upperInclusive) {
+        return fetchRange(UserDetails.USER_DETAILS.EMAIL, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>email IN (values)</code>
+     */
+    public List<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchByEmail(String... values) {
+        return fetch(UserDetails.USER_DETAILS.EMAIL, values);
+    }
+
+    /**
+     * Fetch a unique record that has <code>email = value</code>
+     */
+    public com.dreamjob.db.jooq.tables.pojos.UserDetails fetchOneByEmail(String value) {
+        return fetchOne(UserDetails.USER_DETAILS.EMAIL, value);
+    }
+
+    /**
+     * Fetch a unique record that has <code>email = value</code>
+     */
+    public Optional<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchOptionalByEmail(String value) {
+        return fetchOptional(UserDetails.USER_DETAILS.EMAIL, value);
+    }
+
+    /**
+     * Fetch records that have <code>display_name BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchRangeOfDisplayName(String lowerInclusive, String upperInclusive) {
+        return fetchRange(UserDetails.USER_DETAILS.DISPLAY_NAME, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>display_name IN (values)</code>
+     */
+    public List<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchByDisplayName(String... values) {
+        return fetch(UserDetails.USER_DETAILS.DISPLAY_NAME, values);
+    }
+
+    /**
+     * Fetch records that have <code>role BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchRangeOfRole(String lowerInclusive, String upperInclusive) {
+        return fetchRange(UserDetails.USER_DETAILS.ROLE, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>role IN (values)</code>
+     */
+    public List<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchByRole(String... values) {
+        return fetch(UserDetails.USER_DETAILS.ROLE, values);
     }
 
     /**

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="202503161700_create_offer_table" author="Teodora Derekyovska">
+        <sql dbms="postgresql" splitStatements="true" stripComments="true">
+        <![CDATA[
+            CREATE TABLE IF NOT EXISTS offer (
+                id SERIAL PRIMARY KEY,
+                trader_id INTEGER NOT NULL,
+                labor_cost DECIMAL(10, 2) NOT NULL, -- wage of the trader (without expenses)
+                description TEXT NULL,
+                total_price DECIMAL(10, 2) NOT NULL, -- total price of the offer (including expenses)
+                created_on TIMESTAMP(3) WITHOUT TIME ZONE NOT NULL,
+                updated_on TIMESTAMP(3) WITHOUT TIME ZONE NOT NULL
+            );
+
+            ALTER TABLE IF EXISTS offer
+                ADD CONSTRAINT fk_offer_trader_details_id
+                FOREIGN KEY (trader_id)
+                REFERENCES trader_details(id)
+                ON DELETE CASCADE;
+        ]]>
+        </sql>
+    </changeSet>
+</databaseChangeLog>

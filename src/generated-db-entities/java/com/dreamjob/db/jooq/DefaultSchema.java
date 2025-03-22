@@ -4,6 +4,11 @@
 package com.dreamjob.db.jooq;
 
 
+import com.dreamjob.db.jooq.tables.Offer;
+import com.dreamjob.db.jooq.tables.OfferResource;
+import com.dreamjob.db.jooq.tables.ProfessionType;
+import com.dreamjob.db.jooq.tables.Resource;
+import com.dreamjob.db.jooq.tables.TraderDetails;
 import com.dreamjob.db.jooq.tables.UserDetails;
 
 import java.util.Arrays;
@@ -37,6 +42,31 @@ public class DefaultSchema extends SchemaImpl {
     public static final DefaultSchema DEFAULT_SCHEMA = new DefaultSchema();
 
     /**
+     * The table <code>offer</code>.
+     */
+    public final Offer OFFER = Offer.OFFER;
+
+    /**
+     * The table <code>offer_resource</code>.
+     */
+    public final OfferResource OFFER_RESOURCE = OfferResource.OFFER_RESOURCE;
+
+    /**
+     * The table <code>profession_type</code>.
+     */
+    public final ProfessionType PROFESSION_TYPE = ProfessionType.PROFESSION_TYPE;
+
+    /**
+     * The table <code>resource</code>.
+     */
+    public final Resource RESOURCE = Resource.RESOURCE;
+
+    /**
+     * The table <code>trader_details</code>.
+     */
+    public final TraderDetails TRADER_DETAILS = TraderDetails.TRADER_DETAILS;
+
+    /**
      * The table <code>user_details</code>.
      */
     public final UserDetails USER_DETAILS = UserDetails.USER_DETAILS;
@@ -57,6 +87,11 @@ public class DefaultSchema extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
+            Offer.OFFER,
+            OfferResource.OFFER_RESOURCE,
+            ProfessionType.PROFESSION_TYPE,
+            Resource.RESOURCE,
+            TraderDetails.TRADER_DETAILS,
             UserDetails.USER_DETAILS
         );
     }

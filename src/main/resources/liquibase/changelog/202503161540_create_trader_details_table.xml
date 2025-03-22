@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="202503161540_create_trader_details_table" author="Teodora Derekyovska">
+        <sql dbms="postgresql" splitStatements="true" stripComments="true">
+        <![CDATA[
+            CREATE TABLE IF NOT EXISTS trader_details (
+                id SERIAL PRIMARY KEY,
+                user_id INTEGER NOT NULL,
+                profession_id INTEGER NULL,
+                mobile_number TEXT NULL,
+                description TEXT NULL
+            );
+
+            ALTER TABLE IF EXISTS trader_details
+                ADD CONSTRAINT fk_trader_details_user_details_id
+                FOREIGN KEY (user_id)
+                REFERENCES user_details(id)
+                ON DELETE CASCADE;
+
+            ALTER TABLE IF EXISTS trader_details
+                ADD CONSTRAINT fk_trader_details_profession_type_id
+                FOREIGN KEY (profession_id)
+                REFERENCES profession_type(id)
+                ON DELETE SET NULL;
+
+            CREATE INDEX idx_trader_details_user_details_id ON trader_details(user_id);
+            CREATE INDEX idx_trader_details_profession_type_id ON trader_details(profession_id);
+        ]]>
+        </sql>
+    </changeSet>
+</databaseChangeLog>

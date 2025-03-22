@@ -11,15 +11,15 @@ import com.dreamjob.db.jooq.tables.records.UserDetailsRecord;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 import javax.annotation.processing.Generated;
 
 import org.jooq.Field;
 import org.jooq.ForeignKey;
+import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row5;
+import org.jooq.Row8;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -61,7 +61,7 @@ public class UserDetails extends TableImpl<UserDetailsRecord> {
     /**
      * The column <code>user_details.id</code>.
      */
-    public final TableField<UserDetailsRecord, UUID> ID = createField(DSL.name("id"), SQLDataType.UUID.nullable(false), this, "");
+    public final TableField<UserDetailsRecord, Integer> ID = createField(DSL.name("id"), SQLDataType.INTEGER.nullable(false).identity(true), this, "");
 
     /**
      * The column <code>user_details.username</code>.
@@ -72,6 +72,21 @@ public class UserDetails extends TableImpl<UserDetailsRecord> {
      * The column <code>user_details.password</code>.
      */
     public final TableField<UserDetailsRecord, String> PASSWORD = createField(DSL.name("password"), SQLDataType.CLOB.nullable(false), this, "");
+
+    /**
+     * The column <code>user_details.email</code>.
+     */
+    public final TableField<UserDetailsRecord, String> EMAIL = createField(DSL.name("email"), SQLDataType.CLOB.nullable(false), this, "");
+
+    /**
+     * The column <code>user_details.display_name</code>.
+     */
+    public final TableField<UserDetailsRecord, String> DISPLAY_NAME = createField(DSL.name("display_name"), SQLDataType.CLOB, this, "");
+
+    /**
+     * The column <code>user_details.role</code>.
+     */
+    public final TableField<UserDetailsRecord, String> ROLE = createField(DSL.name("role"), SQLDataType.CLOB.nullable(false), this, "");
 
     /**
      * The column <code>user_details.created_on</code>.
@@ -122,13 +137,18 @@ public class UserDetails extends TableImpl<UserDetailsRecord> {
     }
 
     @Override
+    public Identity<UserDetailsRecord, Integer> getIdentity() {
+        return (Identity<UserDetailsRecord, Integer>) super.getIdentity();
+    }
+
+    @Override
     public UniqueKey<UserDetailsRecord> getPrimaryKey() {
         return Keys.USER_DETAILS_PKEY;
     }
 
     @Override
     public List<UniqueKey<UserDetailsRecord>> getUniqueKeys() {
-        return Arrays.asList(Keys.USER_DETAILS_USERNAME_KEY);
+        return Arrays.asList(Keys.USER_DETAILS_USERNAME_KEY, Keys.USER_DETAILS_EMAIL_KEY);
     }
 
     @Override
@@ -158,11 +178,11 @@ public class UserDetails extends TableImpl<UserDetailsRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row5 type methods
+    // Row8 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row5<UUID, String, String, LocalDateTime, LocalDateTime> fieldsRow() {
-        return (Row5) super.fieldsRow();
+    public Row8<Integer, String, String, String, String, String, LocalDateTime, LocalDateTime> fieldsRow() {
+        return (Row8) super.fieldsRow();
     }
 }

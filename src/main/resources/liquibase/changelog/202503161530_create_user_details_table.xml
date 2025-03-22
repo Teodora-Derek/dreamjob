@@ -4,13 +4,16 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="20250301_create_users_table" author="admin">
+    <changeSet id="202503161530_create_user_details_table" author="Teodora Derekyovska">
         <sql dbms="postgresql" splitStatements="true" stripComments="true">
         <![CDATA[
             CREATE TABLE IF NOT EXISTS user_details (
-                id UUID PRIMARY KEY,
+                id SERIAL PRIMARY KEY,
                 username TEXT UNIQUE NOT NULL,
                 password TEXT NOT NULL,
+                email TEXT UNIQUE NOT NULL,
+                display_name TEXT NULL,
+                user_role TEXT NOT NULL,
                 created_on TIMESTAMP(3) WITHOUT TIME ZONE NOT NULL,
                 updated_on TIMESTAMP(3) WITHOUT TIME ZONE NOT NULL
             );

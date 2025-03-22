@@ -6,6 +6,11 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.8.xsd">
 
     <!-- Import all changesets -->
-    <include file="classpath:liquibase/changelog/20250301_create_users_table.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:liquibase/changelog/202503161530_create_user_details_table.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:liquibase/changelog/202503161535_create_profession_type_table.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:liquibase/changelog/202503161540_create_trader_details_table.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:liquibase/changelog/202503161700_create_offer_table.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:liquibase/changelog/202503161705_create_resource_table.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:liquibase/changelog/202503161730_create_offer_resource_table.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>

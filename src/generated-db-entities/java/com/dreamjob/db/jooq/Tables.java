@@ -4,6 +4,11 @@
 package com.dreamjob.db.jooq;
 
 
+import com.dreamjob.db.jooq.tables.Offer;
+import com.dreamjob.db.jooq.tables.OfferResource;
+import com.dreamjob.db.jooq.tables.ProfessionType;
+import com.dreamjob.db.jooq.tables.Resource;
+import com.dreamjob.db.jooq.tables.TraderDetails;
 import com.dreamjob.db.jooq.tables.UserDetails;
 
 import javax.annotation.processing.Generated;
@@ -21,6 +26,31 @@ import javax.annotation.processing.Generated;
 )
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
+
+    /**
+     * The table <code>offer</code>.
+     */
+    public static final Offer OFFER = Offer.OFFER;
+
+    /**
+     * The table <code>offer_resource</code>.
+     */
+    public static final OfferResource OFFER_RESOURCE = OfferResource.OFFER_RESOURCE;
+
+    /**
+     * The table <code>profession_type</code>.
+     */
+    public static final ProfessionType PROFESSION_TYPE = ProfessionType.PROFESSION_TYPE;
+
+    /**
+     * The table <code>resource</code>.
+     */
+    public static final Resource RESOURCE = Resource.RESOURCE;
+
+    /**
+     * The table <code>trader_details</code>.
+     */
+    public static final TraderDetails TRADER_DETAILS = TraderDetails.TRADER_DETAILS;
 
     /**
      * The table <code>user_details</code>.
