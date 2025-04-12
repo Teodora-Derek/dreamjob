@@ -4,30 +4,30 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
 
-    <changeSet id="202503221650_create_trader_details_city_table" author="Teodora Derekyovska">
+    <changeSet id="202503221650_create_trader_details_profession_table" author="Teodora Derekyovska">
         <sql dbms="postgresql" splitStatements="true" stripComments="true">
         <![CDATA[
-            CREATE TABLE IF NOT EXISTS trader_details_city (
+            CREATE TABLE IF NOT EXISTS trader_details_profession (
                 trader_id INTEGER NOT NULL,
-                city_id INTEGER NOT NULL,
+                profession_id INTEGER NOT NULL,
                 created_on TIMESTAMP(3) WITHOUT TIME ZONE NOT NULL,
                 updated_on TIMESTAMP(3) WITHOUT TIME ZONE NOT NULL,
-                PRIMARY KEY (city_id, trader_id)
+                PRIMARY KEY (profession_id, trader_id)
             );
 
-            ALTER TABLE IF EXISTS trader_details_city
-                ADD CONSTRAINT fk_trader_details_city_trader_details_id
+            ALTER TABLE IF EXISTS trader_details_profession
+                ADD CONSTRAINT fk_trader_details_profession_trader_details_id
                 FOREIGN KEY (trader_id)
                 REFERENCES trader_details(id)
-                ON DELETE CASCADE;
-
-            ALTER TABLE IF EXISTS trader_details_city
-                ADD CONSTRAINT fk_trader_details_city_city_id
-                FOREIGN KEY (city_id)
-                REFERENCES city(id)
                 ON DELETE NO ACTION;
 
-            CREATE INDEX IF NOT EXISTS idx_trader_details_city_trader_id on trader_details_city(trader_id);
+            ALTER TABLE IF EXISTS trader_details_profession
+                ADD CONSTRAINT fk_trader_details_profession_profession_id
+                FOREIGN KEY (profession_id)
+                REFERENCES profession(id)
+                ON DELETE NO ACTION;
+
+            CREATE INDEX IF NOT EXISTS idx_trader_details_profession_profession_id ON trader_details_profession(profession_id);
             ]]>
         </sql>
     </changeSet>

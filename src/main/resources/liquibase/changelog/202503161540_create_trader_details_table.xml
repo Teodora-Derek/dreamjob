@@ -9,10 +9,10 @@
         <![CDATA[
             CREATE TABLE IF NOT EXISTS trader_details (
                 id SERIAL PRIMARY KEY,
-                user_id INTEGER NOT NULL,
-                profession_id INTEGER NULL,
+                user_id INTEGER UNIQUE NOT NULL,
                 mobile_number TEXT NULL,
                 description TEXT NULL,
+                status TEXT NOT NULL,
                 created_on TIMESTAMP(3) WITHOUT TIME ZONE NOT NULL,
                 updated_on TIMESTAMP(3) WITHOUT TIME ZONE NOT NULL
             );
@@ -21,16 +21,10 @@
                 ADD CONSTRAINT fk_trader_details_user_details_id
                 FOREIGN KEY (user_id)
                 REFERENCES user_details(id)
-                ON DELETE CASCADE;
-
-            ALTER TABLE IF EXISTS trader_details
-                ADD CONSTRAINT fk_trader_details_profession_id
-                FOREIGN KEY (profession_id)
-                REFERENCES profession(id)
-                ON DELETE SET NULL;
+                ON DELETE NO ACTION;
 
             CREATE INDEX IF NOT EXISTS idx_trader_details_user_details_id ON trader_details(user_id);
-            CREATE INDEX IF NOT EXISTS idx_trader_details_profession_id ON trader_details(profession_id);
+            CREATE INDEX IF NOT EXISTS idx_trader_details_status ON trader_details(status);
         ]]>
         </sql>
     </changeSet>

@@ -10,9 +10,12 @@
             CREATE TABLE IF NOT EXISTS offer (
                 id SERIAL PRIMARY KEY,
                 trader_id INTEGER NOT NULL,
+                city_id INTEGER NOT NULL,
                 profession_id INTEGER NOT NULL,
                 price_unit TEXT NOT NULL, -- wage of the trader per price unit
+                wage_per_price_unit DECIMAL(10, 2) NOT NULL,
                 description TEXT NULL,
+                status TEXT NOT NULL,
                 created_on TIMESTAMP(3) WITHOUT TIME ZONE NOT NULL,
                 updated_on TIMESTAMP(3) WITHOUT TIME ZONE NOT NULL
             );
@@ -21,14 +24,26 @@
                 ADD CONSTRAINT fk_offer_trader_details_id
                 FOREIGN KEY (trader_id)
                 REFERENCES trader_details(id)
-                ON DELETE CASCADE;
+                ON DELETE NO ACTION;
+
+            ALTER TABLE IF EXISTS offer
+                ADD CONSTRAINT fk_offer_city_id
+                FOREIGN KEY (city_id)
+                REFERENCES city(id)
+                ON DELETE NO ACTION;
 
             ALTER TABLE IF EXISTS offer
                 ADD CONSTRAINT fk_offer_profession_id
                 FOREIGN KEY (profession_id)
                 REFERENCES profession(id)
                 ON DELETE NO ACTION;
-        ]]>
+
+            CREATE INDEX IF NOT EXISTS idx_offer_trader_id ON offer(trader_id);
+            CREATE INDEX IF NOT EXISTS idx_offer_city_id ON offer(city_id);
+            CREATE INDEX IF NOT EXISTS idx_offer_profession_id ON offer(profession_id);
+            CREATE INDEX IF NOT EXISTS idx_offer_wage_per_price_unit ON offer(wage_per_price_unit);
+            CREATE INDEX IF NOT EXISTS idx_offer_status ON offer(status);
+            ]]>
         </sql>
     </changeSet>
 </databaseChangeLog>

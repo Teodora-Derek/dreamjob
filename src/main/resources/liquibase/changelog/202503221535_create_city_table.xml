@@ -10,11 +10,12 @@
             CREATE TABLE IF NOT EXISTS city (
                 id SERIAL PRIMARY KEY,
                 city_name TEXT UNIQUE NOT NULL,
+                status TEXT NOT NULL,
                 created_on TIMESTAMP(3) WITHOUT TIME ZONE NOT NULL,
                 updated_on TIMESTAMP(3) WITHOUT TIME ZONE NOT NULL
             );
 
-            CREATE INDEX IF NOT EXISTS idx_city_city_name on city(city_name);
+            CREATE INDEX IF NOT EXISTS idx_city_city_name ON city(city_name);
             ]]>
         </sql>
     </changeSet>

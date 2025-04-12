@@ -9,9 +9,10 @@
     <include file="classpath:liquibase/changelog/202503161530_create_user_details_table.xml" relativeToChangelogFile="false"/>
     <include file="classpath:liquibase/changelog/202503161535_create_profession_table.xml" relativeToChangelogFile="false"/>
     <include file="classpath:liquibase/changelog/202503161540_create_trader_details_table.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:liquibase/changelog/202503161700_create_offer_table.xml" relativeToChangelogFile="false"/>
     <include file="classpath:liquibase/changelog/202503221535_create_city_table.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:liquibase/changelog/202503221540_create_offer_city_table.xml" relativeToChangelogFile="false"/>
-    <include file="classpath:liquibase/changelog/202503221650_create_trader_details_city_table.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:liquibase/changelog/202503161700_create_offer_table.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:liquibase/changelog/202503221650_create_trader_details_profession_table.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:liquibase/changelog/202503231750_create_administrator_table.xml" relativeToChangelogFile="false"/>
+    <include file="classpath:liquibase/changelog/202503231800_create_admin_action_log_table.xml" relativeToChangelogFile="false"/>
 
 </databaseChangeLog>

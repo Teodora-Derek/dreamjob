@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="202503231800_create_admin_action_log_table" author="Teodora Derekyovska">
+        <sql dbms="postgresql" splitStatements="true" stripComments="true">
+        <![CDATA[
+            CREATE TABLE IF NOT EXISTS admin_action_log (
+                id SERIAL PRIMARY KEY,
+                admin_id INT NOT NULL,
+                action_type TEXT NOT NULL,
+                target_table TEXT NOT NULL,
+                record_id INT NOT NULL,
+                change_details JSONB NULL,
+                created_on TIMESTAMP(3) WITHOUT TIME ZONE NOT NULL
+            );
+
+            ALTER TABLE IF EXISTS admin_action_log
+                ADD CONSTRAINT fk_admin_action_log_administrator_id
+                FOREIGN KEY (admin_id)
+                REFERENCES administrator(id)
+                ON DELETE NO ACTION;
+        ]]>
+        </sql>
+    </changeSet>
+</databaseChangeLog>

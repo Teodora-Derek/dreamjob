@@ -11,11 +11,12 @@
                 id SERIAL PRIMARY KEY,
                 profession_name TEXT NOT NULL,
                 description TEXT NULL,
+                status TEXT NOT NULL,
                 created_on TIMESTAMP(3) WITHOUT TIME ZONE NOT NULL,
                 updated_on TIMESTAMP(3) WITHOUT TIME ZONE NOT NULL
             );
 
-            CREATE INDEX IF NOT EXISTS idx_profession_profession_name on profession(profession_name);
+            CREATE INDEX IF NOT EXISTS idx_profession_profession_name ON profession(profession_name);
         ]]>
         </sql>
     </changeSet>
