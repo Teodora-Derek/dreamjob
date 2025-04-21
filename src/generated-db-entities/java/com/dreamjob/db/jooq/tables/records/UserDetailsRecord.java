@@ -109,17 +109,17 @@ public class UserDetailsRecord extends UpdatableRecordImpl<UserDetailsRecord> im
     }
 
     /**
-     * Setter for <code>user_details.role</code>.
+     * Setter for <code>user_details.status</code>.
      */
-    public UserDetailsRecord setRole(String value) {
+    public UserDetailsRecord setStatus(String value) {
         set(5, value);
         return this;
     }
 
     /**
-     * Getter for <code>user_details.role</code>.
+     * Getter for <code>user_details.status</code>.
      */
-    public String getRole() {
+    public String getStatus() {
         return (String) get(5);
     }
 
@@ -203,7 +203,7 @@ public class UserDetailsRecord extends UpdatableRecordImpl<UserDetailsRecord> im
 
     @Override
     public Field<String> field6() {
-        return UserDetails.USER_DETAILS.ROLE;
+        return UserDetails.USER_DETAILS.STATUS;
     }
 
     @Override
@@ -243,7 +243,7 @@ public class UserDetailsRecord extends UpdatableRecordImpl<UserDetailsRecord> im
 
     @Override
     public String component6() {
-        return getRole();
+        return getStatus();
     }
 
     @Override
@@ -283,7 +283,7 @@ public class UserDetailsRecord extends UpdatableRecordImpl<UserDetailsRecord> im
 
     @Override
     public String value6() {
-        return getRole();
+        return getStatus();
     }
 
     @Override
@@ -328,7 +328,7 @@ public class UserDetailsRecord extends UpdatableRecordImpl<UserDetailsRecord> im
 
     @Override
     public UserDetailsRecord value6(String value) {
-        setRole(value);
+        setStatus(value);
         return this;
     }
 
@@ -371,8 +371,8 @@ public class UserDetailsRecord extends UpdatableRecordImpl<UserDetailsRecord> im
     /**
      * Create a detached, initialised UserDetailsRecord
      */
-    @ConstructorProperties({ "id", "username", "password", "email", "displayName", "role", "createdOn", "updatedOn" })
-    public UserDetailsRecord(Integer id, String username, String password, String email, String displayName, String role, LocalDateTime createdOn, LocalDateTime updatedOn) {
+    @ConstructorProperties({ "id", "username", "password", "email", "displayName", "status", "createdOn", "updatedOn" })
+    public UserDetailsRecord(Integer id, String username, String password, String email, String displayName, String status, LocalDateTime createdOn, LocalDateTime updatedOn) {
         super(UserDetails.USER_DETAILS);
 
         setId(id);
@@ -380,7 +380,7 @@ public class UserDetailsRecord extends UpdatableRecordImpl<UserDetailsRecord> im
         setPassword(password);
         setEmail(email);
         setDisplayName(displayName);
-        setRole(role);
+        setStatus(status);
         setCreatedOn(createdOn);
         setUpdatedOn(updatedOn);
     }
@@ -388,7 +388,7 @@ public class UserDetailsRecord extends UpdatableRecordImpl<UserDetailsRecord> im
     /**
      * Create a detached, initialised UserDetailsRecord
      */
-    @ConstructorProperties({ "id", "username", "password", "email", "displayName", "role", "createdOn", "updatedOn" })
+    @ConstructorProperties({ "id", "username", "password", "email", "displayName", "status", "createdOn", "updatedOn" })
     public UserDetailsRecord(com.dreamjob.db.jooq.tables.pojos.UserDetails value) {
         super(UserDetails.USER_DETAILS);
 
@@ -398,7 +398,7 @@ public class UserDetailsRecord extends UpdatableRecordImpl<UserDetailsRecord> im
             setPassword(value.getPassword());
             setEmail(value.getEmail());
             setDisplayName(value.getDisplayName());
-            setRole(value.getRole());
+            setStatus(value.getStatus());
             setCreatedOn(value.getCreatedOn());
             setUpdatedOn(value.getUpdatedOn());
         }

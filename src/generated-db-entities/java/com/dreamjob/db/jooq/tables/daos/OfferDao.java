@@ -99,18 +99,63 @@ public class OfferDao extends DAOImpl<OfferRecord, com.dreamjob.db.jooq.tables.p
     }
 
     /**
-     * Fetch records that have <code>labor_cost BETWEEN lowerInclusive AND
+     * Fetch records that have <code>city_id BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
-    public List<com.dreamjob.db.jooq.tables.pojos.Offer> fetchRangeOfLaborCost(BigDecimal lowerInclusive, BigDecimal upperInclusive) {
-        return fetchRange(Offer.OFFER.LABOR_COST, lowerInclusive, upperInclusive);
+    public List<com.dreamjob.db.jooq.tables.pojos.Offer> fetchRangeOfCityId(Integer lowerInclusive, Integer upperInclusive) {
+        return fetchRange(Offer.OFFER.CITY_ID, lowerInclusive, upperInclusive);
     }
 
     /**
-     * Fetch records that have <code>labor_cost IN (values)</code>
+     * Fetch records that have <code>city_id IN (values)</code>
      */
-    public List<com.dreamjob.db.jooq.tables.pojos.Offer> fetchByLaborCost(BigDecimal... values) {
-        return fetch(Offer.OFFER.LABOR_COST, values);
+    public List<com.dreamjob.db.jooq.tables.pojos.Offer> fetchByCityId(Integer... values) {
+        return fetch(Offer.OFFER.CITY_ID, values);
+    }
+
+    /**
+     * Fetch records that have <code>profession_id BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<com.dreamjob.db.jooq.tables.pojos.Offer> fetchRangeOfProfessionId(Integer lowerInclusive, Integer upperInclusive) {
+        return fetchRange(Offer.OFFER.PROFESSION_ID, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>profession_id IN (values)</code>
+     */
+    public List<com.dreamjob.db.jooq.tables.pojos.Offer> fetchByProfessionId(Integer... values) {
+        return fetch(Offer.OFFER.PROFESSION_ID, values);
+    }
+
+    /**
+     * Fetch records that have <code>price_unit BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<com.dreamjob.db.jooq.tables.pojos.Offer> fetchRangeOfPriceUnit(String lowerInclusive, String upperInclusive) {
+        return fetchRange(Offer.OFFER.PRICE_UNIT, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>price_unit IN (values)</code>
+     */
+    public List<com.dreamjob.db.jooq.tables.pojos.Offer> fetchByPriceUnit(String... values) {
+        return fetch(Offer.OFFER.PRICE_UNIT, values);
+    }
+
+    /**
+     * Fetch records that have <code>wage_per_price_unit BETWEEN lowerInclusive
+     * AND upperInclusive</code>
+     */
+    public List<com.dreamjob.db.jooq.tables.pojos.Offer> fetchRangeOfWagePerPriceUnit(BigDecimal lowerInclusive, BigDecimal upperInclusive) {
+        return fetchRange(Offer.OFFER.WAGE_PER_PRICE_UNIT, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>wage_per_price_unit IN (values)</code>
+     */
+    public List<com.dreamjob.db.jooq.tables.pojos.Offer> fetchByWagePerPriceUnit(BigDecimal... values) {
+        return fetch(Offer.OFFER.WAGE_PER_PRICE_UNIT, values);
     }
 
     /**
@@ -129,18 +174,18 @@ public class OfferDao extends DAOImpl<OfferRecord, com.dreamjob.db.jooq.tables.p
     }
 
     /**
-     * Fetch records that have <code>total_price BETWEEN lowerInclusive AND
+     * Fetch records that have <code>status BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
-    public List<com.dreamjob.db.jooq.tables.pojos.Offer> fetchRangeOfTotalPrice(BigDecimal lowerInclusive, BigDecimal upperInclusive) {
-        return fetchRange(Offer.OFFER.TOTAL_PRICE, lowerInclusive, upperInclusive);
+    public List<com.dreamjob.db.jooq.tables.pojos.Offer> fetchRangeOfStatus(String lowerInclusive, String upperInclusive) {
+        return fetchRange(Offer.OFFER.STATUS, lowerInclusive, upperInclusive);
     }
 
     /**
-     * Fetch records that have <code>total_price IN (values)</code>
+     * Fetch records that have <code>status IN (values)</code>
      */
-    public List<com.dreamjob.db.jooq.tables.pojos.Offer> fetchByTotalPrice(BigDecimal... values) {
-        return fetch(Offer.OFFER.TOTAL_PRICE, values);
+    public List<com.dreamjob.db.jooq.tables.pojos.Offer> fetchByStatus(String... values) {
+        return fetch(Offer.OFFER.STATUS, values);
     }
 
     /**

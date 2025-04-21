@@ -4,11 +4,13 @@
 package com.dreamjob.db.jooq;
 
 
+import com.dreamjob.db.jooq.tables.AdminActionLog;
+import com.dreamjob.db.jooq.tables.Administrator;
+import com.dreamjob.db.jooq.tables.City;
 import com.dreamjob.db.jooq.tables.Offer;
-import com.dreamjob.db.jooq.tables.OfferResource;
-import com.dreamjob.db.jooq.tables.ProfessionType;
-import com.dreamjob.db.jooq.tables.Resource;
+import com.dreamjob.db.jooq.tables.Profession;
 import com.dreamjob.db.jooq.tables.TraderDetails;
+import com.dreamjob.db.jooq.tables.TraderDetailsProfession;
 import com.dreamjob.db.jooq.tables.UserDetails;
 
 import java.util.Arrays;
@@ -42,29 +44,39 @@ public class DefaultSchema extends SchemaImpl {
     public static final DefaultSchema DEFAULT_SCHEMA = new DefaultSchema();
 
     /**
+     * The table <code>admin_action_log</code>.
+     */
+    public final AdminActionLog ADMIN_ACTION_LOG = AdminActionLog.ADMIN_ACTION_LOG;
+
+    /**
+     * The table <code>administrator</code>.
+     */
+    public final Administrator ADMINISTRATOR = Administrator.ADMINISTRATOR;
+
+    /**
+     * The table <code>city</code>.
+     */
+    public final City CITY = City.CITY;
+
+    /**
      * The table <code>offer</code>.
      */
     public final Offer OFFER = Offer.OFFER;
 
     /**
-     * The table <code>offer_resource</code>.
+     * The table <code>profession</code>.
      */
-    public final OfferResource OFFER_RESOURCE = OfferResource.OFFER_RESOURCE;
-
-    /**
-     * The table <code>profession_type</code>.
-     */
-    public final ProfessionType PROFESSION_TYPE = ProfessionType.PROFESSION_TYPE;
-
-    /**
-     * The table <code>resource</code>.
-     */
-    public final Resource RESOURCE = Resource.RESOURCE;
+    public final Profession PROFESSION = Profession.PROFESSION;
 
     /**
      * The table <code>trader_details</code>.
      */
     public final TraderDetails TRADER_DETAILS = TraderDetails.TRADER_DETAILS;
+
+    /**
+     * The table <code>trader_details_profession</code>.
+     */
+    public final TraderDetailsProfession TRADER_DETAILS_PROFESSION = TraderDetailsProfession.TRADER_DETAILS_PROFESSION;
 
     /**
      * The table <code>user_details</code>.
@@ -87,11 +99,13 @@ public class DefaultSchema extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.asList(
+            AdminActionLog.ADMIN_ACTION_LOG,
+            Administrator.ADMINISTRATOR,
+            City.CITY,
             Offer.OFFER,
-            OfferResource.OFFER_RESOURCE,
-            ProfessionType.PROFESSION_TYPE,
-            Resource.RESOURCE,
+            Profession.PROFESSION,
             TraderDetails.TRADER_DETAILS,
+            TraderDetailsProfession.TRADER_DETAILS_PROFESSION,
             UserDetails.USER_DETAILS
         );
     }

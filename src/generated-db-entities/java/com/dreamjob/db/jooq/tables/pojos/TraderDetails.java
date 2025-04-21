@@ -6,6 +6,7 @@ package com.dreamjob.db.jooq.tables.pojos;
 
 import java.beans.ConstructorProperties;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import javax.annotation.processing.Generated;
 
@@ -25,35 +26,43 @@ public class TraderDetails implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Integer id;
-    private Integer userId;
-    private Integer professionId;
-    private String  mobileNumber;
-    private String  description;
+    private Integer       id;
+    private Integer       userId;
+    private String        mobileNumber;
+    private String        description;
+    private String        status;
+    private LocalDateTime createdOn;
+    private LocalDateTime updatedOn;
 
     public TraderDetails() {}
 
     public TraderDetails(TraderDetails value) {
         this.id = value.id;
         this.userId = value.userId;
-        this.professionId = value.professionId;
         this.mobileNumber = value.mobileNumber;
         this.description = value.description;
+        this.status = value.status;
+        this.createdOn = value.createdOn;
+        this.updatedOn = value.updatedOn;
     }
 
-    @ConstructorProperties({ "id", "userId", "professionId", "mobileNumber", "description" })
+    @ConstructorProperties({ "id", "userId", "mobileNumber", "description", "status", "createdOn", "updatedOn" })
     public TraderDetails(
-        Integer id,
-        Integer userId,
-        Integer professionId,
-        String  mobileNumber,
-        String  description
+        Integer       id,
+        Integer       userId,
+        String        mobileNumber,
+        String        description,
+        String        status,
+        LocalDateTime createdOn,
+        LocalDateTime updatedOn
     ) {
         this.id = id;
         this.userId = userId;
-        this.professionId = professionId;
         this.mobileNumber = mobileNumber;
         this.description = description;
+        this.status = status;
+        this.createdOn = createdOn;
+        this.updatedOn = updatedOn;
     }
 
     /**
@@ -87,21 +96,6 @@ public class TraderDetails implements Serializable {
     }
 
     /**
-     * Getter for <code>trader_details.profession_id</code>.
-     */
-    public Integer getProfessionId() {
-        return this.professionId;
-    }
-
-    /**
-     * Setter for <code>trader_details.profession_id</code>.
-     */
-    public TraderDetails setProfessionId(Integer professionId) {
-        this.professionId = professionId;
-        return this;
-    }
-
-    /**
      * Getter for <code>trader_details.mobile_number</code>.
      */
     public String getMobileNumber() {
@@ -131,6 +125,51 @@ public class TraderDetails implements Serializable {
         return this;
     }
 
+    /**
+     * Getter for <code>trader_details.status</code>.
+     */
+    public String getStatus() {
+        return this.status;
+    }
+
+    /**
+     * Setter for <code>trader_details.status</code>.
+     */
+    public TraderDetails setStatus(String status) {
+        this.status = status;
+        return this;
+    }
+
+    /**
+     * Getter for <code>trader_details.created_on</code>.
+     */
+    public LocalDateTime getCreatedOn() {
+        return this.createdOn;
+    }
+
+    /**
+     * Setter for <code>trader_details.created_on</code>.
+     */
+    public TraderDetails setCreatedOn(LocalDateTime createdOn) {
+        this.createdOn = createdOn;
+        return this;
+    }
+
+    /**
+     * Getter for <code>trader_details.updated_on</code>.
+     */
+    public LocalDateTime getUpdatedOn() {
+        return this.updatedOn;
+    }
+
+    /**
+     * Setter for <code>trader_details.updated_on</code>.
+     */
+    public TraderDetails setUpdatedOn(LocalDateTime updatedOn) {
+        this.updatedOn = updatedOn;
+        return this;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
@@ -152,12 +191,6 @@ public class TraderDetails implements Serializable {
         }
         else if (!userId.equals(other.userId))
             return false;
-        if (professionId == null) {
-            if (other.professionId != null)
-                return false;
-        }
-        else if (!professionId.equals(other.professionId))
-            return false;
         if (mobileNumber == null) {
             if (other.mobileNumber != null)
                 return false;
@@ -170,6 +203,24 @@ public class TraderDetails implements Serializable {
         }
         else if (!description.equals(other.description))
             return false;
+        if (status == null) {
+            if (other.status != null)
+                return false;
+        }
+        else if (!status.equals(other.status))
+            return false;
+        if (createdOn == null) {
+            if (other.createdOn != null)
+                return false;
+        }
+        else if (!createdOn.equals(other.createdOn))
+            return false;
+        if (updatedOn == null) {
+            if (other.updatedOn != null)
+                return false;
+        }
+        else if (!updatedOn.equals(other.updatedOn))
+            return false;
         return true;
     }
 
@@ -179,9 +230,11 @@ public class TraderDetails implements Serializable {
         int result = 1;
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         result = prime * result + ((this.userId == null) ? 0 : this.userId.hashCode());
-        result = prime * result + ((this.professionId == null) ? 0 : this.professionId.hashCode());
         result = prime * result + ((this.mobileNumber == null) ? 0 : this.mobileNumber.hashCode());
         result = prime * result + ((this.description == null) ? 0 : this.description.hashCode());
+        result = prime * result + ((this.status == null) ? 0 : this.status.hashCode());
+        result = prime * result + ((this.createdOn == null) ? 0 : this.createdOn.hashCode());
+        result = prime * result + ((this.updatedOn == null) ? 0 : this.updatedOn.hashCode());
         return result;
     }
 
@@ -191,9 +244,11 @@ public class TraderDetails implements Serializable {
 
         sb.append(id);
         sb.append(", ").append(userId);
-        sb.append(", ").append(professionId);
         sb.append(", ").append(mobileNumber);
         sb.append(", ").append(description);
+        sb.append(", ").append(status);
+        sb.append(", ").append(createdOn);
+        sb.append(", ").append(updatedOn);
 
         sb.append(")");
         return sb.toString();

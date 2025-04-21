@@ -5,6 +5,7 @@ package com.dreamjob.db.jooq.tables;
 
 
 import com.dreamjob.db.jooq.DefaultSchema;
+import com.dreamjob.db.jooq.Indexes;
 import com.dreamjob.db.jooq.Keys;
 import com.dreamjob.db.jooq.tables.records.OfferRecord;
 
@@ -18,9 +19,10 @@ import javax.annotation.processing.Generated;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Identity;
+import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row7;
+import org.jooq.Row10;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -70,9 +72,24 @@ public class Offer extends TableImpl<OfferRecord> {
     public final TableField<OfferRecord, Integer> TRADER_ID = createField(DSL.name("trader_id"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>offer.labor_cost</code>.
+     * The column <code>offer.city_id</code>.
      */
-    public final TableField<OfferRecord, BigDecimal> LABOR_COST = createField(DSL.name("labor_cost"), SQLDataType.NUMERIC(10, 2).nullable(false), this, "");
+    public final TableField<OfferRecord, Integer> CITY_ID = createField(DSL.name("city_id"), SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>offer.profession_id</code>.
+     */
+    public final TableField<OfferRecord, Integer> PROFESSION_ID = createField(DSL.name("profession_id"), SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>offer.price_unit</code>.
+     */
+    public final TableField<OfferRecord, String> PRICE_UNIT = createField(DSL.name("price_unit"), SQLDataType.CLOB.nullable(false), this, "");
+
+    /**
+     * The column <code>offer.wage_per_price_unit</code>.
+     */
+    public final TableField<OfferRecord, BigDecimal> WAGE_PER_PRICE_UNIT = createField(DSL.name("wage_per_price_unit"), SQLDataType.NUMERIC(10, 2).nullable(false), this, "");
 
     /**
      * The column <code>offer.description</code>.
@@ -80,9 +97,9 @@ public class Offer extends TableImpl<OfferRecord> {
     public final TableField<OfferRecord, String> DESCRIPTION = createField(DSL.name("description"), SQLDataType.CLOB, this, "");
 
     /**
-     * The column <code>offer.total_price</code>.
+     * The column <code>offer.status</code>.
      */
-    public final TableField<OfferRecord, BigDecimal> TOTAL_PRICE = createField(DSL.name("total_price"), SQLDataType.NUMERIC(10, 2).nullable(false), this, "");
+    public final TableField<OfferRecord, String> STATUS = createField(DSL.name("status"), SQLDataType.CLOB.nullable(false), this, "");
 
     /**
      * The column <code>offer.created_on</code>.
@@ -133,6 +150,11 @@ public class Offer extends TableImpl<OfferRecord> {
     }
 
     @Override
+    public List<Index> getIndexes() {
+        return Arrays.asList(Indexes.IDX_OFFER_CITY_ID, Indexes.IDX_OFFER_PROFESSION_ID, Indexes.IDX_OFFER_STATUS, Indexes.IDX_OFFER_TRADER_ID, Indexes.IDX_OFFER_WAGE_PER_PRICE_UNIT);
+    }
+
+    @Override
     public Identity<OfferRecord, Integer> getIdentity() {
         return (Identity<OfferRecord, Integer>) super.getIdentity();
     }
@@ -144,10 +166,12 @@ public class Offer extends TableImpl<OfferRecord> {
 
     @Override
     public List<ForeignKey<OfferRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.OFFER__FK_OFFER_TRADER_DETAILS_ID);
+        return Arrays.asList(Keys.OFFER__FK_OFFER_TRADER_DETAILS_ID, Keys.OFFER__FK_OFFER_CITY_ID, Keys.OFFER__FK_OFFER_PROFESSION_ID);
     }
 
     private transient TraderDetails _traderDetails;
+    private transient City _city;
+    private transient Profession _profession;
 
     /**
      * Get the implicit join path to the <code>public.trader_details</code>
@@ -158,6 +182,26 @@ public class Offer extends TableImpl<OfferRecord> {
             _traderDetails = new TraderDetails(this, Keys.OFFER__FK_OFFER_TRADER_DETAILS_ID);
 
         return _traderDetails;
+    }
+
+    /**
+     * Get the implicit join path to the <code>public.city</code> table.
+     */
+    public City city() {
+        if (_city == null)
+            _city = new City(this, Keys.OFFER__FK_OFFER_CITY_ID);
+
+        return _city;
+    }
+
+    /**
+     * Get the implicit join path to the <code>public.profession</code> table.
+     */
+    public Profession profession() {
+        if (_profession == null)
+            _profession = new Profession(this, Keys.OFFER__FK_OFFER_PROFESSION_ID);
+
+        return _profession;
     }
 
     @Override
@@ -187,11 +231,11 @@ public class Offer extends TableImpl<OfferRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row7 type methods
+    // Row10 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row7<Integer, Integer, BigDecimal, String, BigDecimal, LocalDateTime, LocalDateTime> fieldsRow() {
-        return (Row7) super.fieldsRow();
+    public Row10<Integer, Integer, Integer, Integer, String, BigDecimal, String, String, LocalDateTime, LocalDateTime> fieldsRow() {
+        return (Row10) super.fieldsRow();
     }
 }

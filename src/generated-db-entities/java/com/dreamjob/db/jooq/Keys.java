@@ -4,16 +4,20 @@
 package com.dreamjob.db.jooq;
 
 
+import com.dreamjob.db.jooq.tables.AdminActionLog;
+import com.dreamjob.db.jooq.tables.Administrator;
+import com.dreamjob.db.jooq.tables.City;
 import com.dreamjob.db.jooq.tables.Offer;
-import com.dreamjob.db.jooq.tables.OfferResource;
-import com.dreamjob.db.jooq.tables.ProfessionType;
-import com.dreamjob.db.jooq.tables.Resource;
+import com.dreamjob.db.jooq.tables.Profession;
 import com.dreamjob.db.jooq.tables.TraderDetails;
+import com.dreamjob.db.jooq.tables.TraderDetailsProfession;
 import com.dreamjob.db.jooq.tables.UserDetails;
+import com.dreamjob.db.jooq.tables.records.AdminActionLogRecord;
+import com.dreamjob.db.jooq.tables.records.AdministratorRecord;
+import com.dreamjob.db.jooq.tables.records.CityRecord;
 import com.dreamjob.db.jooq.tables.records.OfferRecord;
-import com.dreamjob.db.jooq.tables.records.OfferResourceRecord;
-import com.dreamjob.db.jooq.tables.records.ProfessionTypeRecord;
-import com.dreamjob.db.jooq.tables.records.ResourceRecord;
+import com.dreamjob.db.jooq.tables.records.ProfessionRecord;
+import com.dreamjob.db.jooq.tables.records.TraderDetailsProfessionRecord;
 import com.dreamjob.db.jooq.tables.records.TraderDetailsRecord;
 import com.dreamjob.db.jooq.tables.records.UserDetailsRecord;
 
@@ -44,11 +48,17 @@ public class Keys {
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<AdminActionLogRecord> ADMIN_ACTION_LOG_PKEY = Internal.createUniqueKey(AdminActionLog.ADMIN_ACTION_LOG, DSL.name("admin_action_log_pkey"), new TableField[] { AdminActionLog.ADMIN_ACTION_LOG.ID }, true);
+    public static final UniqueKey<AdministratorRecord> ADMINISTRATOR_EMAIL_KEY = Internal.createUniqueKey(Administrator.ADMINISTRATOR, DSL.name("administrator_email_key"), new TableField[] { Administrator.ADMINISTRATOR.EMAIL }, true);
+    public static final UniqueKey<AdministratorRecord> ADMINISTRATOR_PKEY = Internal.createUniqueKey(Administrator.ADMINISTRATOR, DSL.name("administrator_pkey"), new TableField[] { Administrator.ADMINISTRATOR.ID }, true);
+    public static final UniqueKey<AdministratorRecord> ADMINISTRATOR_USERNAME_KEY = Internal.createUniqueKey(Administrator.ADMINISTRATOR, DSL.name("administrator_username_key"), new TableField[] { Administrator.ADMINISTRATOR.USERNAME }, true);
+    public static final UniqueKey<CityRecord> CITY_CITY_NAME_KEY = Internal.createUniqueKey(City.CITY, DSL.name("city_city_name_key"), new TableField[] { City.CITY.CITY_NAME }, true);
+    public static final UniqueKey<CityRecord> CITY_PKEY = Internal.createUniqueKey(City.CITY, DSL.name("city_pkey"), new TableField[] { City.CITY.ID }, true);
     public static final UniqueKey<OfferRecord> OFFER_PKEY = Internal.createUniqueKey(Offer.OFFER, DSL.name("offer_pkey"), new TableField[] { Offer.OFFER.ID }, true);
-    public static final UniqueKey<OfferResourceRecord> OFFER_RESOURCE_PKEY = Internal.createUniqueKey(OfferResource.OFFER_RESOURCE, DSL.name("offer_resource_pkey"), new TableField[] { OfferResource.OFFER_RESOURCE.ID }, true);
-    public static final UniqueKey<ProfessionTypeRecord> PROFESSION_TYPE_PKEY = Internal.createUniqueKey(ProfessionType.PROFESSION_TYPE, DSL.name("profession_type_pkey"), new TableField[] { ProfessionType.PROFESSION_TYPE.ID }, true);
-    public static final UniqueKey<ResourceRecord> RESOURCE_PKEY = Internal.createUniqueKey(Resource.RESOURCE, DSL.name("resource_pkey"), new TableField[] { Resource.RESOURCE.ID }, true);
+    public static final UniqueKey<ProfessionRecord> PROFESSION_PKEY = Internal.createUniqueKey(Profession.PROFESSION, DSL.name("profession_pkey"), new TableField[] { Profession.PROFESSION.ID }, true);
     public static final UniqueKey<TraderDetailsRecord> TRADER_DETAILS_PKEY = Internal.createUniqueKey(TraderDetails.TRADER_DETAILS, DSL.name("trader_details_pkey"), new TableField[] { TraderDetails.TRADER_DETAILS.ID }, true);
+    public static final UniqueKey<TraderDetailsRecord> TRADER_DETAILS_USER_ID_KEY = Internal.createUniqueKey(TraderDetails.TRADER_DETAILS, DSL.name("trader_details_user_id_key"), new TableField[] { TraderDetails.TRADER_DETAILS.USER_ID }, true);
+    public static final UniqueKey<TraderDetailsProfessionRecord> TRADER_DETAILS_PROFESSION_PKEY = Internal.createUniqueKey(TraderDetailsProfession.TRADER_DETAILS_PROFESSION, DSL.name("trader_details_profession_pkey"), new TableField[] { TraderDetailsProfession.TRADER_DETAILS_PROFESSION.PROFESSION_ID, TraderDetailsProfession.TRADER_DETAILS_PROFESSION.TRADER_ID }, true);
     public static final UniqueKey<UserDetailsRecord> USER_DETAILS_EMAIL_KEY = Internal.createUniqueKey(UserDetails.USER_DETAILS, DSL.name("user_details_email_key"), new TableField[] { UserDetails.USER_DETAILS.EMAIL }, true);
     public static final UniqueKey<UserDetailsRecord> USER_DETAILS_PKEY = Internal.createUniqueKey(UserDetails.USER_DETAILS, DSL.name("user_details_pkey"), new TableField[] { UserDetails.USER_DETAILS.ID }, true);
     public static final UniqueKey<UserDetailsRecord> USER_DETAILS_USERNAME_KEY = Internal.createUniqueKey(UserDetails.USER_DETAILS, DSL.name("user_details_username_key"), new TableField[] { UserDetails.USER_DETAILS.USERNAME }, true);
@@ -57,9 +67,11 @@ public class Keys {
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<AdminActionLogRecord, AdministratorRecord> ADMIN_ACTION_LOG__FK_ADMIN_ACTION_LOG_ADMINISTRATOR_ID = Internal.createForeignKey(AdminActionLog.ADMIN_ACTION_LOG, DSL.name("fk_admin_action_log_administrator_id"), new TableField[] { AdminActionLog.ADMIN_ACTION_LOG.ADMIN_ID }, Keys.ADMINISTRATOR_PKEY, new TableField[] { Administrator.ADMINISTRATOR.ID }, true);
+    public static final ForeignKey<OfferRecord, CityRecord> OFFER__FK_OFFER_CITY_ID = Internal.createForeignKey(Offer.OFFER, DSL.name("fk_offer_city_id"), new TableField[] { Offer.OFFER.CITY_ID }, Keys.CITY_PKEY, new TableField[] { City.CITY.ID }, true);
+    public static final ForeignKey<OfferRecord, ProfessionRecord> OFFER__FK_OFFER_PROFESSION_ID = Internal.createForeignKey(Offer.OFFER, DSL.name("fk_offer_profession_id"), new TableField[] { Offer.OFFER.PROFESSION_ID }, Keys.PROFESSION_PKEY, new TableField[] { Profession.PROFESSION.ID }, true);
     public static final ForeignKey<OfferRecord, TraderDetailsRecord> OFFER__FK_OFFER_TRADER_DETAILS_ID = Internal.createForeignKey(Offer.OFFER, DSL.name("fk_offer_trader_details_id"), new TableField[] { Offer.OFFER.TRADER_ID }, Keys.TRADER_DETAILS_PKEY, new TableField[] { TraderDetails.TRADER_DETAILS.ID }, true);
-    public static final ForeignKey<OfferResourceRecord, OfferRecord> OFFER_RESOURCE__FK_OFFER_RESOURCE_OFFER_ID = Internal.createForeignKey(OfferResource.OFFER_RESOURCE, DSL.name("fk_offer_resource_offer_id"), new TableField[] { OfferResource.OFFER_RESOURCE.OFFER_ID }, Keys.OFFER_PKEY, new TableField[] { Offer.OFFER.ID }, true);
-    public static final ForeignKey<OfferResourceRecord, ResourceRecord> OFFER_RESOURCE__FK_OFFER_RESOURCE_RESOURCE_ID = Internal.createForeignKey(OfferResource.OFFER_RESOURCE, DSL.name("fk_offer_resource_resource_id"), new TableField[] { OfferResource.OFFER_RESOURCE.RESOURCE_ID }, Keys.RESOURCE_PKEY, new TableField[] { Resource.RESOURCE.ID }, true);
-    public static final ForeignKey<TraderDetailsRecord, ProfessionTypeRecord> TRADER_DETAILS__FK_TRADER_DETAILS_PROFESSION_TYPE_ID = Internal.createForeignKey(TraderDetails.TRADER_DETAILS, DSL.name("fk_trader_details_profession_type_id"), new TableField[] { TraderDetails.TRADER_DETAILS.PROFESSION_ID }, Keys.PROFESSION_TYPE_PKEY, new TableField[] { ProfessionType.PROFESSION_TYPE.ID }, true);
     public static final ForeignKey<TraderDetailsRecord, UserDetailsRecord> TRADER_DETAILS__FK_TRADER_DETAILS_USER_DETAILS_ID = Internal.createForeignKey(TraderDetails.TRADER_DETAILS, DSL.name("fk_trader_details_user_details_id"), new TableField[] { TraderDetails.TRADER_DETAILS.USER_ID }, Keys.USER_DETAILS_PKEY, new TableField[] { UserDetails.USER_DETAILS.ID }, true);
+    public static final ForeignKey<TraderDetailsProfessionRecord, ProfessionRecord> TRADER_DETAILS_PROFESSION__FK_TRADER_DETAILS_PROFESSION_PROFESSION_ID = Internal.createForeignKey(TraderDetailsProfession.TRADER_DETAILS_PROFESSION, DSL.name("fk_trader_details_profession_profession_id"), new TableField[] { TraderDetailsProfession.TRADER_DETAILS_PROFESSION.PROFESSION_ID }, Keys.PROFESSION_PKEY, new TableField[] { Profession.PROFESSION.ID }, true);
+    public static final ForeignKey<TraderDetailsProfessionRecord, TraderDetailsRecord> TRADER_DETAILS_PROFESSION__FK_TRADER_DETAILS_PROFESSION_TRADER_DETAILS_ID = Internal.createForeignKey(TraderDetailsProfession.TRADER_DETAILS_PROFESSION, DSL.name("fk_trader_details_profession_trader_details_id"), new TableField[] { TraderDetailsProfession.TRADER_DETAILS_PROFESSION.TRADER_ID }, Keys.TRADER_DETAILS_PKEY, new TableField[] { TraderDetails.TRADER_DETAILS.ID }, true);
 }

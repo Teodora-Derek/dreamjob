@@ -29,9 +29,12 @@ public class Offer implements Serializable {
 
     private Integer       id;
     private Integer       traderId;
-    private BigDecimal    laborCost;
+    private Integer       cityId;
+    private Integer       professionId;
+    private String        priceUnit;
+    private BigDecimal    wagePerPriceUnit;
     private String        description;
-    private BigDecimal    totalPrice;
+    private String        status;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
 
@@ -40,28 +43,37 @@ public class Offer implements Serializable {
     public Offer(Offer value) {
         this.id = value.id;
         this.traderId = value.traderId;
-        this.laborCost = value.laborCost;
+        this.cityId = value.cityId;
+        this.professionId = value.professionId;
+        this.priceUnit = value.priceUnit;
+        this.wagePerPriceUnit = value.wagePerPriceUnit;
         this.description = value.description;
-        this.totalPrice = value.totalPrice;
+        this.status = value.status;
         this.createdOn = value.createdOn;
         this.updatedOn = value.updatedOn;
     }
 
-    @ConstructorProperties({ "id", "traderId", "laborCost", "description", "totalPrice", "createdOn", "updatedOn" })
+    @ConstructorProperties({ "id", "traderId", "cityId", "professionId", "priceUnit", "wagePerPriceUnit", "description", "status", "createdOn", "updatedOn" })
     public Offer(
         Integer       id,
         Integer       traderId,
-        BigDecimal    laborCost,
+        Integer       cityId,
+        Integer       professionId,
+        String        priceUnit,
+        BigDecimal    wagePerPriceUnit,
         String        description,
-        BigDecimal    totalPrice,
+        String        status,
         LocalDateTime createdOn,
         LocalDateTime updatedOn
     ) {
         this.id = id;
         this.traderId = traderId;
-        this.laborCost = laborCost;
+        this.cityId = cityId;
+        this.professionId = professionId;
+        this.priceUnit = priceUnit;
+        this.wagePerPriceUnit = wagePerPriceUnit;
         this.description = description;
-        this.totalPrice = totalPrice;
+        this.status = status;
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
     }
@@ -97,17 +109,62 @@ public class Offer implements Serializable {
     }
 
     /**
-     * Getter for <code>offer.labor_cost</code>.
+     * Getter for <code>offer.city_id</code>.
      */
-    public BigDecimal getLaborCost() {
-        return this.laborCost;
+    public Integer getCityId() {
+        return this.cityId;
     }
 
     /**
-     * Setter for <code>offer.labor_cost</code>.
+     * Setter for <code>offer.city_id</code>.
      */
-    public Offer setLaborCost(BigDecimal laborCost) {
-        this.laborCost = laborCost;
+    public Offer setCityId(Integer cityId) {
+        this.cityId = cityId;
+        return this;
+    }
+
+    /**
+     * Getter for <code>offer.profession_id</code>.
+     */
+    public Integer getProfessionId() {
+        return this.professionId;
+    }
+
+    /**
+     * Setter for <code>offer.profession_id</code>.
+     */
+    public Offer setProfessionId(Integer professionId) {
+        this.professionId = professionId;
+        return this;
+    }
+
+    /**
+     * Getter for <code>offer.price_unit</code>.
+     */
+    public String getPriceUnit() {
+        return this.priceUnit;
+    }
+
+    /**
+     * Setter for <code>offer.price_unit</code>.
+     */
+    public Offer setPriceUnit(String priceUnit) {
+        this.priceUnit = priceUnit;
+        return this;
+    }
+
+    /**
+     * Getter for <code>offer.wage_per_price_unit</code>.
+     */
+    public BigDecimal getWagePerPriceUnit() {
+        return this.wagePerPriceUnit;
+    }
+
+    /**
+     * Setter for <code>offer.wage_per_price_unit</code>.
+     */
+    public Offer setWagePerPriceUnit(BigDecimal wagePerPriceUnit) {
+        this.wagePerPriceUnit = wagePerPriceUnit;
         return this;
     }
 
@@ -127,17 +184,17 @@ public class Offer implements Serializable {
     }
 
     /**
-     * Getter for <code>offer.total_price</code>.
+     * Getter for <code>offer.status</code>.
      */
-    public BigDecimal getTotalPrice() {
-        return this.totalPrice;
+    public String getStatus() {
+        return this.status;
     }
 
     /**
-     * Setter for <code>offer.total_price</code>.
+     * Setter for <code>offer.status</code>.
      */
-    public Offer setTotalPrice(BigDecimal totalPrice) {
-        this.totalPrice = totalPrice;
+    public Offer setStatus(String status) {
+        this.status = status;
         return this;
     }
 
@@ -192,11 +249,29 @@ public class Offer implements Serializable {
         }
         else if (!traderId.equals(other.traderId))
             return false;
-        if (laborCost == null) {
-            if (other.laborCost != null)
+        if (cityId == null) {
+            if (other.cityId != null)
                 return false;
         }
-        else if (!laborCost.equals(other.laborCost))
+        else if (!cityId.equals(other.cityId))
+            return false;
+        if (professionId == null) {
+            if (other.professionId != null)
+                return false;
+        }
+        else if (!professionId.equals(other.professionId))
+            return false;
+        if (priceUnit == null) {
+            if (other.priceUnit != null)
+                return false;
+        }
+        else if (!priceUnit.equals(other.priceUnit))
+            return false;
+        if (wagePerPriceUnit == null) {
+            if (other.wagePerPriceUnit != null)
+                return false;
+        }
+        else if (!wagePerPriceUnit.equals(other.wagePerPriceUnit))
             return false;
         if (description == null) {
             if (other.description != null)
@@ -204,11 +279,11 @@ public class Offer implements Serializable {
         }
         else if (!description.equals(other.description))
             return false;
-        if (totalPrice == null) {
-            if (other.totalPrice != null)
+        if (status == null) {
+            if (other.status != null)
                 return false;
         }
-        else if (!totalPrice.equals(other.totalPrice))
+        else if (!status.equals(other.status))
             return false;
         if (createdOn == null) {
             if (other.createdOn != null)
@@ -231,9 +306,12 @@ public class Offer implements Serializable {
         int result = 1;
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         result = prime * result + ((this.traderId == null) ? 0 : this.traderId.hashCode());
-        result = prime * result + ((this.laborCost == null) ? 0 : this.laborCost.hashCode());
+        result = prime * result + ((this.cityId == null) ? 0 : this.cityId.hashCode());
+        result = prime * result + ((this.professionId == null) ? 0 : this.professionId.hashCode());
+        result = prime * result + ((this.priceUnit == null) ? 0 : this.priceUnit.hashCode());
+        result = prime * result + ((this.wagePerPriceUnit == null) ? 0 : this.wagePerPriceUnit.hashCode());
         result = prime * result + ((this.description == null) ? 0 : this.description.hashCode());
-        result = prime * result + ((this.totalPrice == null) ? 0 : this.totalPrice.hashCode());
+        result = prime * result + ((this.status == null) ? 0 : this.status.hashCode());
         result = prime * result + ((this.createdOn == null) ? 0 : this.createdOn.hashCode());
         result = prime * result + ((this.updatedOn == null) ? 0 : this.updatedOn.hashCode());
         return result;
@@ -245,9 +323,12 @@ public class Offer implements Serializable {
 
         sb.append(id);
         sb.append(", ").append(traderId);
-        sb.append(", ").append(laborCost);
+        sb.append(", ").append(cityId);
+        sb.append(", ").append(professionId);
+        sb.append(", ").append(priceUnit);
+        sb.append(", ").append(wagePerPriceUnit);
         sb.append(", ").append(description);
-        sb.append(", ").append(totalPrice);
+        sb.append(", ").append(status);
         sb.append(", ").append(createdOn);
         sb.append(", ").append(updatedOn);
 

@@ -171,18 +171,18 @@ public class UserDetailsDao extends DAOImpl<UserDetailsRecord, com.dreamjob.db.j
     }
 
     /**
-     * Fetch records that have <code>role BETWEEN lowerInclusive AND
+     * Fetch records that have <code>status BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
-    public List<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchRangeOfRole(String lowerInclusive, String upperInclusive) {
-        return fetchRange(UserDetails.USER_DETAILS.ROLE, lowerInclusive, upperInclusive);
+    public List<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchRangeOfStatus(String lowerInclusive, String upperInclusive) {
+        return fetchRange(UserDetails.USER_DETAILS.STATUS, lowerInclusive, upperInclusive);
     }
 
     /**
-     * Fetch records that have <code>role IN (values)</code>
+     * Fetch records that have <code>status IN (values)</code>
      */
-    public List<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchByRole(String... values) {
-        return fetch(UserDetails.USER_DETAILS.ROLE, values);
+    public List<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchByStatus(String... values) {
+        return fetch(UserDetails.USER_DETAILS.STATUS, values);
     }
 
     /**

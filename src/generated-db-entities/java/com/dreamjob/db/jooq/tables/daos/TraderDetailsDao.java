@@ -7,6 +7,7 @@ package com.dreamjob.db.jooq.tables.daos;
 import com.dreamjob.db.jooq.tables.TraderDetails;
 import com.dreamjob.db.jooq.tables.records.TraderDetailsRecord;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -97,18 +98,17 @@ public class TraderDetailsDao extends DAOImpl<TraderDetailsRecord, com.dreamjob.
     }
 
     /**
-     * Fetch records that have <code>profession_id BETWEEN lowerInclusive AND
-     * upperInclusive</code>
+     * Fetch a unique record that has <code>user_id = value</code>
      */
-    public List<com.dreamjob.db.jooq.tables.pojos.TraderDetails> fetchRangeOfProfessionId(Integer lowerInclusive, Integer upperInclusive) {
-        return fetchRange(TraderDetails.TRADER_DETAILS.PROFESSION_ID, lowerInclusive, upperInclusive);
+    public com.dreamjob.db.jooq.tables.pojos.TraderDetails fetchOneByUserId(Integer value) {
+        return fetchOne(TraderDetails.TRADER_DETAILS.USER_ID, value);
     }
 
     /**
-     * Fetch records that have <code>profession_id IN (values)</code>
+     * Fetch a unique record that has <code>user_id = value</code>
      */
-    public List<com.dreamjob.db.jooq.tables.pojos.TraderDetails> fetchByProfessionId(Integer... values) {
-        return fetch(TraderDetails.TRADER_DETAILS.PROFESSION_ID, values);
+    public Optional<com.dreamjob.db.jooq.tables.pojos.TraderDetails> fetchOptionalByUserId(Integer value) {
+        return fetchOptional(TraderDetails.TRADER_DETAILS.USER_ID, value);
     }
 
     /**
@@ -139,5 +139,50 @@ public class TraderDetailsDao extends DAOImpl<TraderDetailsRecord, com.dreamjob.
      */
     public List<com.dreamjob.db.jooq.tables.pojos.TraderDetails> fetchByDescription(String... values) {
         return fetch(TraderDetails.TRADER_DETAILS.DESCRIPTION, values);
+    }
+
+    /**
+     * Fetch records that have <code>status BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<com.dreamjob.db.jooq.tables.pojos.TraderDetails> fetchRangeOfStatus(String lowerInclusive, String upperInclusive) {
+        return fetchRange(TraderDetails.TRADER_DETAILS.STATUS, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>status IN (values)</code>
+     */
+    public List<com.dreamjob.db.jooq.tables.pojos.TraderDetails> fetchByStatus(String... values) {
+        return fetch(TraderDetails.TRADER_DETAILS.STATUS, values);
+    }
+
+    /**
+     * Fetch records that have <code>created_on BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<com.dreamjob.db.jooq.tables.pojos.TraderDetails> fetchRangeOfCreatedOn(LocalDateTime lowerInclusive, LocalDateTime upperInclusive) {
+        return fetchRange(TraderDetails.TRADER_DETAILS.CREATED_ON, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>created_on IN (values)</code>
+     */
+    public List<com.dreamjob.db.jooq.tables.pojos.TraderDetails> fetchByCreatedOn(LocalDateTime... values) {
+        return fetch(TraderDetails.TRADER_DETAILS.CREATED_ON, values);
+    }
+
+    /**
+     * Fetch records that have <code>updated_on BETWEEN lowerInclusive AND
+     * upperInclusive</code>
+     */
+    public List<com.dreamjob.db.jooq.tables.pojos.TraderDetails> fetchRangeOfUpdatedOn(LocalDateTime lowerInclusive, LocalDateTime upperInclusive) {
+        return fetchRange(TraderDetails.TRADER_DETAILS.UPDATED_ON, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>updated_on IN (values)</code>
+     */
+    public List<com.dreamjob.db.jooq.tables.pojos.TraderDetails> fetchByUpdatedOn(LocalDateTime... values) {
+        return fetch(TraderDetails.TRADER_DETAILS.UPDATED_ON, values);
     }
 }

@@ -4,7 +4,12 @@
 package com.dreamjob.db.jooq;
 
 
+import com.dreamjob.db.jooq.tables.City;
+import com.dreamjob.db.jooq.tables.Offer;
+import com.dreamjob.db.jooq.tables.Profession;
 import com.dreamjob.db.jooq.tables.TraderDetails;
+import com.dreamjob.db.jooq.tables.TraderDetailsProfession;
+import com.dreamjob.db.jooq.tables.UserDetails;
 
 import javax.annotation.processing.Generated;
 
@@ -31,6 +36,15 @@ public class Indexes {
     // INDEX definitions
     // -------------------------------------------------------------------------
 
-    public static final Index IDX_TRADER_DETAILS_PROFESSION_TYPE_ID = Internal.createIndex(DSL.name("idx_trader_details_profession_type_id"), TraderDetails.TRADER_DETAILS, new OrderField[] { TraderDetails.TRADER_DETAILS.PROFESSION_ID }, false);
+    public static final Index IDX_CITY_CITY_NAME = Internal.createIndex(DSL.name("idx_city_city_name"), City.CITY, new OrderField[] { City.CITY.CITY_NAME }, false);
+    public static final Index IDX_OFFER_CITY_ID = Internal.createIndex(DSL.name("idx_offer_city_id"), Offer.OFFER, new OrderField[] { Offer.OFFER.CITY_ID }, false);
+    public static final Index IDX_OFFER_PROFESSION_ID = Internal.createIndex(DSL.name("idx_offer_profession_id"), Offer.OFFER, new OrderField[] { Offer.OFFER.PROFESSION_ID }, false);
+    public static final Index IDX_OFFER_STATUS = Internal.createIndex(DSL.name("idx_offer_status"), Offer.OFFER, new OrderField[] { Offer.OFFER.STATUS }, false);
+    public static final Index IDX_OFFER_TRADER_ID = Internal.createIndex(DSL.name("idx_offer_trader_id"), Offer.OFFER, new OrderField[] { Offer.OFFER.TRADER_ID }, false);
+    public static final Index IDX_OFFER_WAGE_PER_PRICE_UNIT = Internal.createIndex(DSL.name("idx_offer_wage_per_price_unit"), Offer.OFFER, new OrderField[] { Offer.OFFER.WAGE_PER_PRICE_UNIT }, false);
+    public static final Index IDX_PROFESSION_PROFESSION_NAME = Internal.createIndex(DSL.name("idx_profession_profession_name"), Profession.PROFESSION, new OrderField[] { Profession.PROFESSION.PROFESSION_NAME }, false);
+    public static final Index IDX_TRADER_DETAILS_PROFESSION_PROFESSION_ID = Internal.createIndex(DSL.name("idx_trader_details_profession_profession_id"), TraderDetailsProfession.TRADER_DETAILS_PROFESSION, new OrderField[] { TraderDetailsProfession.TRADER_DETAILS_PROFESSION.PROFESSION_ID }, false);
+    public static final Index IDX_TRADER_DETAILS_STATUS = Internal.createIndex(DSL.name("idx_trader_details_status"), TraderDetails.TRADER_DETAILS, new OrderField[] { TraderDetails.TRADER_DETAILS.STATUS }, false);
     public static final Index IDX_TRADER_DETAILS_USER_DETAILS_ID = Internal.createIndex(DSL.name("idx_trader_details_user_details_id"), TraderDetails.TRADER_DETAILS, new OrderField[] { TraderDetails.TRADER_DETAILS.USER_ID }, false);
+    public static final Index IDX_USER_DETAILS_STATUS = Internal.createIndex(DSL.name("idx_user_details_status"), UserDetails.USER_DETAILS, new OrderField[] { UserDetails.USER_DETAILS.STATUS }, false);
 }

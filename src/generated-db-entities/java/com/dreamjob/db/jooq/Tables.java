@@ -4,11 +4,13 @@
 package com.dreamjob.db.jooq;
 
 
+import com.dreamjob.db.jooq.tables.AdminActionLog;
+import com.dreamjob.db.jooq.tables.Administrator;
+import com.dreamjob.db.jooq.tables.City;
 import com.dreamjob.db.jooq.tables.Offer;
-import com.dreamjob.db.jooq.tables.OfferResource;
-import com.dreamjob.db.jooq.tables.ProfessionType;
-import com.dreamjob.db.jooq.tables.Resource;
+import com.dreamjob.db.jooq.tables.Profession;
 import com.dreamjob.db.jooq.tables.TraderDetails;
+import com.dreamjob.db.jooq.tables.TraderDetailsProfession;
 import com.dreamjob.db.jooq.tables.UserDetails;
 
 import javax.annotation.processing.Generated;
@@ -28,29 +30,39 @@ import javax.annotation.processing.Generated;
 public class Tables {
 
     /**
+     * The table <code>admin_action_log</code>.
+     */
+    public static final AdminActionLog ADMIN_ACTION_LOG = AdminActionLog.ADMIN_ACTION_LOG;
+
+    /**
+     * The table <code>administrator</code>.
+     */
+    public static final Administrator ADMINISTRATOR = Administrator.ADMINISTRATOR;
+
+    /**
+     * The table <code>city</code>.
+     */
+    public static final City CITY = City.CITY;
+
+    /**
      * The table <code>offer</code>.
      */
     public static final Offer OFFER = Offer.OFFER;
 
     /**
-     * The table <code>offer_resource</code>.
+     * The table <code>profession</code>.
      */
-    public static final OfferResource OFFER_RESOURCE = OfferResource.OFFER_RESOURCE;
-
-    /**
-     * The table <code>profession_type</code>.
-     */
-    public static final ProfessionType PROFESSION_TYPE = ProfessionType.PROFESSION_TYPE;
-
-    /**
-     * The table <code>resource</code>.
-     */
-    public static final Resource RESOURCE = Resource.RESOURCE;
+    public static final Profession PROFESSION = Profession.PROFESSION;
 
     /**
      * The table <code>trader_details</code>.
      */
     public static final TraderDetails TRADER_DETAILS = TraderDetails.TRADER_DETAILS;
+
+    /**
+     * The table <code>trader_details_profession</code>.
+     */
+    public static final TraderDetailsProfession TRADER_DETAILS_PROFESSION = TraderDetailsProfession.TRADER_DETAILS_PROFESSION;
 
     /**
      * The table <code>user_details</code>.

@@ -5,6 +5,7 @@ package com.dreamjob.db.jooq.tables;
 
 
 import com.dreamjob.db.jooq.DefaultSchema;
+import com.dreamjob.db.jooq.Indexes;
 import com.dreamjob.db.jooq.Keys;
 import com.dreamjob.db.jooq.tables.records.UserDetailsRecord;
 
@@ -17,6 +18,7 @@ import javax.annotation.processing.Generated;
 import org.jooq.Field;
 import org.jooq.ForeignKey;
 import org.jooq.Identity;
+import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
 import org.jooq.Row8;
@@ -84,9 +86,9 @@ public class UserDetails extends TableImpl<UserDetailsRecord> {
     public final TableField<UserDetailsRecord, String> DISPLAY_NAME = createField(DSL.name("display_name"), SQLDataType.CLOB, this, "");
 
     /**
-     * The column <code>user_details.role</code>.
+     * The column <code>user_details.status</code>.
      */
-    public final TableField<UserDetailsRecord, String> ROLE = createField(DSL.name("role"), SQLDataType.CLOB.nullable(false), this, "");
+    public final TableField<UserDetailsRecord, String> STATUS = createField(DSL.name("status"), SQLDataType.CLOB.nullable(false), this, "");
 
     /**
      * The column <code>user_details.created_on</code>.
@@ -134,6 +136,11 @@ public class UserDetails extends TableImpl<UserDetailsRecord> {
     @Override
     public Schema getSchema() {
         return aliased() ? null : DefaultSchema.DEFAULT_SCHEMA;
+    }
+
+    @Override
+    public List<Index> getIndexes() {
+        return Arrays.asList(Indexes.IDX_USER_DETAILS_STATUS);
     }
 
     @Override

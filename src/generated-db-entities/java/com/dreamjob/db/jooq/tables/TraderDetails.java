@@ -9,6 +9,7 @@ import com.dreamjob.db.jooq.Indexes;
 import com.dreamjob.db.jooq.Keys;
 import com.dreamjob.db.jooq.tables.records.TraderDetailsRecord;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,7 +21,7 @@ import org.jooq.Identity;
 import org.jooq.Index;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row5;
+import org.jooq.Row7;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -70,11 +71,6 @@ public class TraderDetails extends TableImpl<TraderDetailsRecord> {
     public final TableField<TraderDetailsRecord, Integer> USER_ID = createField(DSL.name("user_id"), SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
-     * The column <code>trader_details.profession_id</code>.
-     */
-    public final TableField<TraderDetailsRecord, Integer> PROFESSION_ID = createField(DSL.name("profession_id"), SQLDataType.INTEGER, this, "");
-
-    /**
      * The column <code>trader_details.mobile_number</code>.
      */
     public final TableField<TraderDetailsRecord, String> MOBILE_NUMBER = createField(DSL.name("mobile_number"), SQLDataType.CLOB, this, "");
@@ -83,6 +79,21 @@ public class TraderDetails extends TableImpl<TraderDetailsRecord> {
      * The column <code>trader_details.description</code>.
      */
     public final TableField<TraderDetailsRecord, String> DESCRIPTION = createField(DSL.name("description"), SQLDataType.CLOB, this, "");
+
+    /**
+     * The column <code>trader_details.status</code>.
+     */
+    public final TableField<TraderDetailsRecord, String> STATUS = createField(DSL.name("status"), SQLDataType.CLOB.nullable(false), this, "");
+
+    /**
+     * The column <code>trader_details.created_on</code>.
+     */
+    public final TableField<TraderDetailsRecord, LocalDateTime> CREATED_ON = createField(DSL.name("created_on"), SQLDataType.LOCALDATETIME(3).nullable(false), this, "");
+
+    /**
+     * The column <code>trader_details.updated_on</code>.
+     */
+    public final TableField<TraderDetailsRecord, LocalDateTime> UPDATED_ON = createField(DSL.name("updated_on"), SQLDataType.LOCALDATETIME(3).nullable(false), this, "");
 
     private TraderDetails(Name alias, Table<TraderDetailsRecord> aliased) {
         this(alias, aliased, null);
@@ -124,7 +135,7 @@ public class TraderDetails extends TableImpl<TraderDetailsRecord> {
 
     @Override
     public List<Index> getIndexes() {
-        return Arrays.asList(Indexes.IDX_TRADER_DETAILS_PROFESSION_TYPE_ID, Indexes.IDX_TRADER_DETAILS_USER_DETAILS_ID);
+        return Arrays.asList(Indexes.IDX_TRADER_DETAILS_STATUS, Indexes.IDX_TRADER_DETAILS_USER_DETAILS_ID);
     }
 
     @Override
@@ -138,12 +149,16 @@ public class TraderDetails extends TableImpl<TraderDetailsRecord> {
     }
 
     @Override
+    public List<UniqueKey<TraderDetailsRecord>> getUniqueKeys() {
+        return Arrays.asList(Keys.TRADER_DETAILS_USER_ID_KEY);
+    }
+
+    @Override
     public List<ForeignKey<TraderDetailsRecord, ?>> getReferences() {
-        return Arrays.asList(Keys.TRADER_DETAILS__FK_TRADER_DETAILS_USER_DETAILS_ID, Keys.TRADER_DETAILS__FK_TRADER_DETAILS_PROFESSION_TYPE_ID);
+        return Arrays.asList(Keys.TRADER_DETAILS__FK_TRADER_DETAILS_USER_DETAILS_ID);
     }
 
     private transient UserDetails _userDetails;
-    private transient ProfessionType _professionType;
 
     /**
      * Get the implicit join path to the <code>public.user_details</code> table.
@@ -153,17 +168,6 @@ public class TraderDetails extends TableImpl<TraderDetailsRecord> {
             _userDetails = new UserDetails(this, Keys.TRADER_DETAILS__FK_TRADER_DETAILS_USER_DETAILS_ID);
 
         return _userDetails;
-    }
-
-    /**
-     * Get the implicit join path to the <code>public.profession_type</code>
-     * table.
-     */
-    public ProfessionType professionType() {
-        if (_professionType == null)
-            _professionType = new ProfessionType(this, Keys.TRADER_DETAILS__FK_TRADER_DETAILS_PROFESSION_TYPE_ID);
-
-        return _professionType;
     }
 
     @Override
@@ -193,11 +197,11 @@ public class TraderDetails extends TableImpl<TraderDetailsRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row5 type methods
+    // Row7 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row5<Integer, Integer, Integer, String, String> fieldsRow() {
-        return (Row5) super.fieldsRow();
+    public Row7<Integer, Integer, String, String, String, LocalDateTime, LocalDateTime> fieldsRow() {
+        return (Row7) super.fieldsRow();
     }
 }
