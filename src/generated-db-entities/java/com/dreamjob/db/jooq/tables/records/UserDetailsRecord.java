@@ -64,17 +64,17 @@ public class UserDetailsRecord extends UpdatableRecordImpl<UserDetailsRecord> im
     }
 
     /**
-     * Setter for <code>user_details.password</code>.
+     * Setter for <code>user_details.password_hash</code>.
      */
-    public UserDetailsRecord setPassword(String value) {
+    public UserDetailsRecord setPasswordHash(String value) {
         set(2, value);
         return this;
     }
 
     /**
-     * Getter for <code>user_details.password</code>.
+     * Getter for <code>user_details.password_hash</code>.
      */
-    public String getPassword() {
+    public String getPasswordHash() {
         return (String) get(2);
     }
 
@@ -188,7 +188,7 @@ public class UserDetailsRecord extends UpdatableRecordImpl<UserDetailsRecord> im
 
     @Override
     public Field<String> field3() {
-        return UserDetails.USER_DETAILS.PASSWORD;
+        return UserDetails.USER_DETAILS.PASSWORD_HASH;
     }
 
     @Override
@@ -228,7 +228,7 @@ public class UserDetailsRecord extends UpdatableRecordImpl<UserDetailsRecord> im
 
     @Override
     public String component3() {
-        return getPassword();
+        return getPasswordHash();
     }
 
     @Override
@@ -268,7 +268,7 @@ public class UserDetailsRecord extends UpdatableRecordImpl<UserDetailsRecord> im
 
     @Override
     public String value3() {
-        return getPassword();
+        return getPasswordHash();
     }
 
     @Override
@@ -310,7 +310,7 @@ public class UserDetailsRecord extends UpdatableRecordImpl<UserDetailsRecord> im
 
     @Override
     public UserDetailsRecord value3(String value) {
-        setPassword(value);
+        setPasswordHash(value);
         return this;
     }
 
@@ -371,13 +371,13 @@ public class UserDetailsRecord extends UpdatableRecordImpl<UserDetailsRecord> im
     /**
      * Create a detached, initialised UserDetailsRecord
      */
-    @ConstructorProperties({ "id", "username", "password", "email", "displayName", "status", "createdOn", "updatedOn" })
-    public UserDetailsRecord(Integer id, String username, String password, String email, String displayName, String status, LocalDateTime createdOn, LocalDateTime updatedOn) {
+    @ConstructorProperties({ "id", "username", "passwordHash", "email", "displayName", "status", "createdOn", "updatedOn" })
+    public UserDetailsRecord(Integer id, String username, String passwordHash, String email, String displayName, String status, LocalDateTime createdOn, LocalDateTime updatedOn) {
         super(UserDetails.USER_DETAILS);
 
         setId(id);
         setUsername(username);
-        setPassword(password);
+        setPasswordHash(passwordHash);
         setEmail(email);
         setDisplayName(displayName);
         setStatus(status);
@@ -388,14 +388,14 @@ public class UserDetailsRecord extends UpdatableRecordImpl<UserDetailsRecord> im
     /**
      * Create a detached, initialised UserDetailsRecord
      */
-    @ConstructorProperties({ "id", "username", "password", "email", "displayName", "status", "createdOn", "updatedOn" })
+    @ConstructorProperties({ "id", "username", "passwordHash", "email", "displayName", "status", "createdOn", "updatedOn" })
     public UserDetailsRecord(com.dreamjob.db.jooq.tables.pojos.UserDetails value) {
         super(UserDetails.USER_DETAILS);
 
         if (value != null) {
             setId(value.getId());
             setUsername(value.getUsername());
-            setPassword(value.getPassword());
+            setPasswordHash(value.getPasswordHash());
             setEmail(value.getEmail());
             setDisplayName(value.getDisplayName());
             setStatus(value.getStatus());

@@ -112,18 +112,18 @@ public class UserDetailsDao extends DAOImpl<UserDetailsRecord, com.dreamjob.db.j
     }
 
     /**
-     * Fetch records that have <code>password BETWEEN lowerInclusive AND
+     * Fetch records that have <code>password_hash BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
-    public List<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchRangeOfPassword(String lowerInclusive, String upperInclusive) {
-        return fetchRange(UserDetails.USER_DETAILS.PASSWORD, lowerInclusive, upperInclusive);
+    public List<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchRangeOfPasswordHash(String lowerInclusive, String upperInclusive) {
+        return fetchRange(UserDetails.USER_DETAILS.PASSWORD_HASH, lowerInclusive, upperInclusive);
     }
 
     /**
-     * Fetch records that have <code>password IN (values)</code>
+     * Fetch records that have <code>password_hash IN (values)</code>
      */
-    public List<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchByPassword(String... values) {
-        return fetch(UserDetails.USER_DETAILS.PASSWORD, values);
+    public List<com.dreamjob.db.jooq.tables.pojos.UserDetails> fetchByPasswordHash(String... values) {
+        return fetch(UserDetails.USER_DETAILS.PASSWORD_HASH, values);
     }
 
     /**

@@ -79,17 +79,17 @@ public class AdministratorRecord extends UpdatableRecordImpl<AdministratorRecord
     }
 
     /**
-     * Setter for <code>administrator.password</code>.
+     * Setter for <code>administrator.password_hash</code>.
      */
-    public AdministratorRecord setPassword(String value) {
+    public AdministratorRecord setPasswordHash(String value) {
         set(3, value);
         return this;
     }
 
     /**
-     * Getter for <code>administrator.password</code>.
+     * Getter for <code>administrator.password_hash</code>.
      */
-    public String getPassword() {
+    public String getPasswordHash() {
         return (String) get(3);
     }
 
@@ -163,7 +163,7 @@ public class AdministratorRecord extends UpdatableRecordImpl<AdministratorRecord
 
     @Override
     public Field<String> field4() {
-        return Administrator.ADMINISTRATOR.PASSWORD;
+        return Administrator.ADMINISTRATOR.PASSWORD_HASH;
     }
 
     @Override
@@ -193,7 +193,7 @@ public class AdministratorRecord extends UpdatableRecordImpl<AdministratorRecord
 
     @Override
     public String component4() {
-        return getPassword();
+        return getPasswordHash();
     }
 
     @Override
@@ -223,7 +223,7 @@ public class AdministratorRecord extends UpdatableRecordImpl<AdministratorRecord
 
     @Override
     public String value4() {
-        return getPassword();
+        return getPasswordHash();
     }
 
     @Override
@@ -256,7 +256,7 @@ public class AdministratorRecord extends UpdatableRecordImpl<AdministratorRecord
 
     @Override
     public AdministratorRecord value4(String value) {
-        setPassword(value);
+        setPasswordHash(value);
         return this;
     }
 
@@ -297,14 +297,14 @@ public class AdministratorRecord extends UpdatableRecordImpl<AdministratorRecord
     /**
      * Create a detached, initialised AdministratorRecord
      */
-    @ConstructorProperties({ "id", "username", "email", "password", "createdOn", "updatedOn" })
-    public AdministratorRecord(Integer id, String username, String email, String password, LocalDateTime createdOn, LocalDateTime updatedOn) {
+    @ConstructorProperties({ "id", "username", "email", "passwordHash", "createdOn", "updatedOn" })
+    public AdministratorRecord(Integer id, String username, String email, String passwordHash, LocalDateTime createdOn, LocalDateTime updatedOn) {
         super(Administrator.ADMINISTRATOR);
 
         setId(id);
         setUsername(username);
         setEmail(email);
-        setPassword(password);
+        setPasswordHash(passwordHash);
         setCreatedOn(createdOn);
         setUpdatedOn(updatedOn);
     }
@@ -312,7 +312,7 @@ public class AdministratorRecord extends UpdatableRecordImpl<AdministratorRecord
     /**
      * Create a detached, initialised AdministratorRecord
      */
-    @ConstructorProperties({ "id", "username", "email", "password", "createdOn", "updatedOn" })
+    @ConstructorProperties({ "id", "username", "email", "passwordHash", "createdOn", "updatedOn" })
     public AdministratorRecord(com.dreamjob.db.jooq.tables.pojos.Administrator value) {
         super(Administrator.ADMINISTRATOR);
 
@@ -320,7 +320,7 @@ public class AdministratorRecord extends UpdatableRecordImpl<AdministratorRecord
             setId(value.getId());
             setUsername(value.getUsername());
             setEmail(value.getEmail());
-            setPassword(value.getPassword());
+            setPasswordHash(value.getPasswordHash());
             setCreatedOn(value.getCreatedOn());
             setUpdatedOn(value.getUpdatedOn());
         }

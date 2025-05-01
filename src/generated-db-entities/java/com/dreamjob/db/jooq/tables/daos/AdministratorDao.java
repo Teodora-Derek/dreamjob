@@ -141,18 +141,18 @@ public class AdministratorDao extends DAOImpl<AdministratorRecord, com.dreamjob.
     }
 
     /**
-     * Fetch records that have <code>password BETWEEN lowerInclusive AND
+     * Fetch records that have <code>password_hash BETWEEN lowerInclusive AND
      * upperInclusive</code>
      */
-    public List<com.dreamjob.db.jooq.tables.pojos.Administrator> fetchRangeOfPassword(String lowerInclusive, String upperInclusive) {
-        return fetchRange(Administrator.ADMINISTRATOR.PASSWORD, lowerInclusive, upperInclusive);
+    public List<com.dreamjob.db.jooq.tables.pojos.Administrator> fetchRangeOfPasswordHash(String lowerInclusive, String upperInclusive) {
+        return fetchRange(Administrator.ADMINISTRATOR.PASSWORD_HASH, lowerInclusive, upperInclusive);
     }
 
     /**
-     * Fetch records that have <code>password IN (values)</code>
+     * Fetch records that have <code>password_hash IN (values)</code>
      */
-    public List<com.dreamjob.db.jooq.tables.pojos.Administrator> fetchByPassword(String... values) {
-        return fetch(Administrator.ADMINISTRATOR.PASSWORD, values);
+    public List<com.dreamjob.db.jooq.tables.pojos.Administrator> fetchByPasswordHash(String... values) {
+        return fetch(Administrator.ADMINISTRATOR.PASSWORD_HASH, values);
     }
 
     /**

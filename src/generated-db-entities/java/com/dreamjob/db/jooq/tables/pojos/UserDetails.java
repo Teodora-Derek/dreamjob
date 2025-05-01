@@ -28,7 +28,7 @@ public class UserDetails implements Serializable {
 
     private Integer       id;
     private String        username;
-    private String        password;
+    private String        passwordHash;
     private String        email;
     private String        displayName;
     private String        status;
@@ -40,7 +40,7 @@ public class UserDetails implements Serializable {
     public UserDetails(UserDetails value) {
         this.id = value.id;
         this.username = value.username;
-        this.password = value.password;
+        this.passwordHash = value.passwordHash;
         this.email = value.email;
         this.displayName = value.displayName;
         this.status = value.status;
@@ -48,11 +48,11 @@ public class UserDetails implements Serializable {
         this.updatedOn = value.updatedOn;
     }
 
-    @ConstructorProperties({ "id", "username", "password", "email", "displayName", "status", "createdOn", "updatedOn" })
+    @ConstructorProperties({ "id", "username", "passwordHash", "email", "displayName", "status", "createdOn", "updatedOn" })
     public UserDetails(
         Integer       id,
         String        username,
-        String        password,
+        String        passwordHash,
         String        email,
         String        displayName,
         String        status,
@@ -61,7 +61,7 @@ public class UserDetails implements Serializable {
     ) {
         this.id = id;
         this.username = username;
-        this.password = password;
+        this.passwordHash = passwordHash;
         this.email = email;
         this.displayName = displayName;
         this.status = status;
@@ -100,17 +100,17 @@ public class UserDetails implements Serializable {
     }
 
     /**
-     * Getter for <code>user_details.password</code>.
+     * Getter for <code>user_details.password_hash</code>.
      */
-    public String getPassword() {
-        return this.password;
+    public String getPasswordHash() {
+        return this.passwordHash;
     }
 
     /**
-     * Setter for <code>user_details.password</code>.
+     * Setter for <code>user_details.password_hash</code>.
      */
-    public UserDetails setPassword(String password) {
-        this.password = password;
+    public UserDetails setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
         return this;
     }
 
@@ -210,11 +210,11 @@ public class UserDetails implements Serializable {
         }
         else if (!username.equals(other.username))
             return false;
-        if (password == null) {
-            if (other.password != null)
+        if (passwordHash == null) {
+            if (other.passwordHash != null)
                 return false;
         }
-        else if (!password.equals(other.password))
+        else if (!passwordHash.equals(other.passwordHash))
             return false;
         if (email == null) {
             if (other.email != null)
@@ -255,7 +255,7 @@ public class UserDetails implements Serializable {
         int result = 1;
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         result = prime * result + ((this.username == null) ? 0 : this.username.hashCode());
-        result = prime * result + ((this.password == null) ? 0 : this.password.hashCode());
+        result = prime * result + ((this.passwordHash == null) ? 0 : this.passwordHash.hashCode());
         result = prime * result + ((this.email == null) ? 0 : this.email.hashCode());
         result = prime * result + ((this.displayName == null) ? 0 : this.displayName.hashCode());
         result = prime * result + ((this.status == null) ? 0 : this.status.hashCode());
@@ -270,7 +270,7 @@ public class UserDetails implements Serializable {
 
         sb.append(id);
         sb.append(", ").append(username);
-        sb.append(", ").append(password);
+        sb.append(", ").append(passwordHash);
         sb.append(", ").append(email);
         sb.append(", ").append(displayName);
         sb.append(", ").append(status);

@@ -29,7 +29,7 @@ public class Administrator implements Serializable {
     private Integer       id;
     private String        username;
     private String        email;
-    private String        password;
+    private String        passwordHash;
     private LocalDateTime createdOn;
     private LocalDateTime updatedOn;
 
@@ -39,24 +39,24 @@ public class Administrator implements Serializable {
         this.id = value.id;
         this.username = value.username;
         this.email = value.email;
-        this.password = value.password;
+        this.passwordHash = value.passwordHash;
         this.createdOn = value.createdOn;
         this.updatedOn = value.updatedOn;
     }
 
-    @ConstructorProperties({ "id", "username", "email", "password", "createdOn", "updatedOn" })
+    @ConstructorProperties({ "id", "username", "email", "passwordHash", "createdOn", "updatedOn" })
     public Administrator(
         Integer       id,
         String        username,
         String        email,
-        String        password,
+        String        passwordHash,
         LocalDateTime createdOn,
         LocalDateTime updatedOn
     ) {
         this.id = id;
         this.username = username;
         this.email = email;
-        this.password = password;
+        this.passwordHash = passwordHash;
         this.createdOn = createdOn;
         this.updatedOn = updatedOn;
     }
@@ -107,17 +107,17 @@ public class Administrator implements Serializable {
     }
 
     /**
-     * Getter for <code>administrator.password</code>.
+     * Getter for <code>administrator.password_hash</code>.
      */
-    public String getPassword() {
-        return this.password;
+    public String getPasswordHash() {
+        return this.passwordHash;
     }
 
     /**
-     * Setter for <code>administrator.password</code>.
+     * Setter for <code>administrator.password_hash</code>.
      */
-    public Administrator setPassword(String password) {
-        this.password = password;
+    public Administrator setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
         return this;
     }
 
@@ -178,11 +178,11 @@ public class Administrator implements Serializable {
         }
         else if (!email.equals(other.email))
             return false;
-        if (password == null) {
-            if (other.password != null)
+        if (passwordHash == null) {
+            if (other.passwordHash != null)
                 return false;
         }
-        else if (!password.equals(other.password))
+        else if (!passwordHash.equals(other.passwordHash))
             return false;
         if (createdOn == null) {
             if (other.createdOn != null)
@@ -206,7 +206,7 @@ public class Administrator implements Serializable {
         result = prime * result + ((this.id == null) ? 0 : this.id.hashCode());
         result = prime * result + ((this.username == null) ? 0 : this.username.hashCode());
         result = prime * result + ((this.email == null) ? 0 : this.email.hashCode());
-        result = prime * result + ((this.password == null) ? 0 : this.password.hashCode());
+        result = prime * result + ((this.passwordHash == null) ? 0 : this.passwordHash.hashCode());
         result = prime * result + ((this.createdOn == null) ? 0 : this.createdOn.hashCode());
         result = prime * result + ((this.updatedOn == null) ? 0 : this.updatedOn.hashCode());
         return result;
@@ -219,7 +219,7 @@ public class Administrator implements Serializable {
         sb.append(id);
         sb.append(", ").append(username);
         sb.append(", ").append(email);
-        sb.append(", ").append(password);
+        sb.append(", ").append(passwordHash);
         sb.append(", ").append(createdOn);
         sb.append(", ").append(updatedOn);
 

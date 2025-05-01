@@ -71,9 +71,9 @@ public class UserDetails extends TableImpl<UserDetailsRecord> {
     public final TableField<UserDetailsRecord, String> USERNAME = createField(DSL.name("username"), SQLDataType.CLOB.nullable(false), this, "");
 
     /**
-     * The column <code>user_details.password</code>.
+     * The column <code>user_details.password_hash</code>.
      */
-    public final TableField<UserDetailsRecord, String> PASSWORD = createField(DSL.name("password"), SQLDataType.CLOB.nullable(false), this, "");
+    public final TableField<UserDetailsRecord, String> PASSWORD_HASH = createField(DSL.name("password_hash"), SQLDataType.CLOB.nullable(false), this, "");
 
     /**
      * The column <code>user_details.email</code>.

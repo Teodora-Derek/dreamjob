@@ -74,9 +74,9 @@ public class Administrator extends TableImpl<AdministratorRecord> {
     public final TableField<AdministratorRecord, String> EMAIL = createField(DSL.name("email"), SQLDataType.CLOB.nullable(false), this, "");
 
     /**
-     * The column <code>administrator.password</code>.
+     * The column <code>administrator.password_hash</code>.
      */
-    public final TableField<AdministratorRecord, String> PASSWORD = createField(DSL.name("password"), SQLDataType.CLOB.nullable(false), this, "");
+    public final TableField<AdministratorRecord, String> PASSWORD_HASH = createField(DSL.name("password_hash"), SQLDataType.CLOB.nullable(false), this, "");
 
     /**
      * The column <code>administrator.created_on</code>.
