@@ -1,5 +1,9 @@
 package com.workplace.dreamjob.user.model;
 
-public record UserDetails(String userId, String username, String password, String email,
-                          String displayName, AccountStatus status) {
+import com.workplace.dreamjob.common.Role;
+import lombok.Builder;
+
+@Builder
+public record UserDetails(int userId, String username, String passwordHash, String email,
+                          String displayName, Role role, AccountStatus status) {
 }

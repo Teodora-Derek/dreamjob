@@ -1,8 +1,25 @@
 package com.workplace.dreamjob.security.user;
 
+import com.workplace.dreamjob.common.BadRequestException;
 import com.workplace.dreamjob.common.Role;
+import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
+public record AuthUser(String userId, Role role) {
 
-public record AuthUser(String userId, List<Role> roles) {
+    public boolean isUserIdNumeric() {
+        return StringUtils.isNumeric(userId);
+    }
+
+    public int getNumericUserId() {
+
+        if (!isUserIdNumeric()) {
+            throw new BadRequestException("UserId is not numeric!");
+        }
+
+        try {
+            return Integer.parseInt(userId);
+        } catch (Exception exception) {
+            throw new BadRequestException("UserId is not numeric!");
+        }
+    }
 }

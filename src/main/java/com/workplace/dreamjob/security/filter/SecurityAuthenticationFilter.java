@@ -19,9 +19,11 @@ import java.io.IOException;
 @Component
 public class SecurityAuthenticationFilter extends OncePerRequestFilter {
 
+    private static final String BEARER_PREFIX = "Bearer";
+
     private final JwtService jwtService;
 
-    public SecurityAuthenticationFilter(JwtService jwtService) {
+    public SecurityAuthenticationFilter(JwtService jwtService)  {
         this.jwtService = jwtService;
     }
 
@@ -53,7 +55,7 @@ public class SecurityAuthenticationFilter extends OncePerRequestFilter {
 
     String stripBearerPrefix(String token) {
 
-        if (!token.startsWith("Bearer")) {
+        if (!token.startsWith(BEARER_PREFIX)) {
             throw new TokenAuthenticationException("Unsupported authentication scheme");
         }
 

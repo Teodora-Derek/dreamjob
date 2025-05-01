@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = {"/auth"})
+@RequestMapping(path = {"/users"})
 public class UserController {
 
     private final UserService userService;
 
-    @PostMapping(path = {"user/register"})
+    @PostMapping(path = {"customer/register"})
     public ResponseEntity<Void> registerUser(
             @Valid @RequestBody CreateUserRequest createUserRequest) {
-        // let's say we somehow create a JWT token and then persist the user
+        // persist the user
         userService.createUser(createUserRequest);
         return ResponseEntity.ok().build();
     }

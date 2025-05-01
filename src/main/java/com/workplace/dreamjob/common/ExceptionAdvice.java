@@ -15,4 +15,10 @@ public class ExceptionAdvice {
         log.error("Bad request exception is thrown!");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage());
     }
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<String> handleNotFoundException(NotFoundException exception) {
+        log.error("Not found exception is thrown!");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
+    }
 }

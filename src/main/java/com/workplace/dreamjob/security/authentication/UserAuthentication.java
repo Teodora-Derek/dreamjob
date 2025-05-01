@@ -6,13 +6,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Collection;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public record UserAuthentication(AuthUser authUser) implements Authentication {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return authUser.roles().stream().map(Enum::name).map(SimpleGrantedAuthority::new)
+        return Set.of(authUser.role()).stream().map(Enum::name).map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toSet());
     }
 
@@ -33,7 +34,7 @@ public record UserAuthentication(AuthUser authUser) implements Authentication {
 
     @Override
     public boolean isAuthenticated() {
-        // This value is set to true in this example because Authentication is used only to represent
+        // This value is set to true because Authentication is used only to represent
         // an authenticated user and not for transferring authentication details
         return true;
     }

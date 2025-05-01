@@ -20,14 +20,14 @@ public class JwtService {
     private static final String ROLES_CLAIM = "roles";
 
     private final Algorithm signingAlgorithm;
+    private final long expirationTime;
 
-    public JwtService(@Value("${jwt.signing-secret}") String signingSecret) {
+    public JwtService(@Value("${jwt.secret}") String signingSecret,
+            @Value("${jwt.expiration}") long expirationTime) {
 
-        // this example uses a symmetric signature of the JWT token, but if you want the issuer and the
-        // verifier of the JWT token to be different applications you may want to use an asymmetric
-        // signature
-
+        // use a symmetric signature of the JWT token for simplicity
         this.signingAlgorithm = Algorithm.HMAC256(signingSecret);
+        this.expirationTime = expirationTime;
     }
 
     public AuthUser resolveJwtToken(String token) {
@@ -36,22 +36,21 @@ public class JwtService {
             DecodedJWT decodedJWT = verifier.verify(token);
 
             String userId = decodedJWT.getSubject();
-            List<Role> roles = decodedJWT.getClaim(ROLES_CLAIM).asList(Role.class);
+            Role role = decodedJWT.getClaim(ROLES_CLAIM).as(Role.class);
 
-            return new AuthUser(userId, roles);
+            return new AuthUser(userId, role);
         } catch (JWTVerificationException exception) {
             throw new TokenAuthenticationException("JWT is not valid");
         }
     }
 
-    public String createJwtToken(AuthUser authUser,
-            @Value("${jwt.expiration}") long expirationTime) {
+    public String createJwtToken(AuthUser authUser) {
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
         long expMillis = nowMillis + expirationTime; // 1 hour validity
         Date exp = new Date(expMillis);
 
-        List<String> roles = authUser.roles().stream().map(Role::name).toList();
+        List<String> roles = List.of(authUser.role().name());
 
         return JWT.create().withSubject(authUser.userId()).withClaim(ROLES_CLAIM, roles)
                 .withIssuedAt(now).withExpiresAt(exp).sign(signingAlgorithm);
