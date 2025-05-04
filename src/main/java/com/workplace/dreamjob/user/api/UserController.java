@@ -1,9 +1,9 @@
 package com.workplace.dreamjob.user.api;
 
-import com.workplace.dreamjob.security.user.AuthUser;
-import com.workplace.dreamjob.user.api.model.CreateTraderRequest;
+import com.workplace.dreamjob.security.model.AuthUser;
+import com.workplace.dreamjob.user.api.request.CreateTraderRequest;
 import com.workplace.dreamjob.user.service.TraderService;
-import com.workplace.dreamjob.user.service.model.TraderCreateCommand;
+import com.workplace.dreamjob.user.service.request.TraderCreateCommand;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

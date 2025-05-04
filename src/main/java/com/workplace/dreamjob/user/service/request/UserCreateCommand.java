@@ -1,6 +1,6 @@
-package com.workplace.dreamjob.user.service.model;
+package com.workplace.dreamjob.user.service.request;
 
-import com.workplace.dreamjob.user.api.model.CreateUserRequest;
+import com.workplace.dreamjob.user.api.request.CreateUserRequest;
 import lombok.Builder;
 
 @Builder

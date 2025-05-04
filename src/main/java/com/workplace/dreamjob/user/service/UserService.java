@@ -1,16 +1,16 @@
 package com.workplace.dreamjob.user.service;
 
 import com.workplace.dreamjob.common.AccountStatus;
-import com.workplace.dreamjob.common.BadRequestException;
-import com.workplace.dreamjob.common.NotFoundException;
+import com.workplace.dreamjob.common.exception.BadRequestException;
+import com.workplace.dreamjob.common.exception.NotFoundException;
 import com.workplace.dreamjob.common.Role;
 import com.workplace.dreamjob.security.exception.ApplicationAuthenticationException;
 import com.workplace.dreamjob.user.model.UserDetails;
 import com.workplace.dreamjob.user.repository.UserRepository;
-import com.workplace.dreamjob.user.service.model.UserCreateCommand;
-import com.workplace.dreamjob.user.service.model.UserPatchCommand;
-import com.workplace.dreamjob.user.service.model.UserResponse;
-import com.workplace.dreamjob.user.service.model.UserResponseWithCredentials;
+import com.workplace.dreamjob.user.service.request.UserCreateCommand;
+import com.workplace.dreamjob.user.service.request.UserPatchCommand;
+import com.workplace.dreamjob.user.service.response.UserResponse;
+import com.workplace.dreamjob.user.service.response.UserResponseWithCredentials;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;

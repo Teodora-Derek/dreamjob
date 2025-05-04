@@ -1,7 +1,7 @@
 package com.workplace.dreamjob.security.exception.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.workplace.dreamjob.dto.error.ApiErrorResponse;
+import com.workplace.dreamjob.common.exception.ApiErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;

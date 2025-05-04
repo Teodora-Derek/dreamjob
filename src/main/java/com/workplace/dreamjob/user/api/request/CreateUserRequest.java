@@ -1,10 +1,9 @@
-package com.workplace.dreamjob.user.api.model;
+package com.workplace.dreamjob.user.api.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.Builder;
 
 public record CreateUserRequest(
 

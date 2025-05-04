@@ -1,4 +1,4 @@
-package com.workplace.dreamjob.dto.error;
+package com.workplace.dreamjob.common.exception;
 
 public record ApiErrorResponse(String message) {
 }

@@ -1,4 +1,4 @@
-package com.workplace.dreamjob.user.service.model;
+package com.workplace.dreamjob.user.service.response;
 
 import com.workplace.dreamjob.common.AccountStatus;
 import com.workplace.dreamjob.common.Role;

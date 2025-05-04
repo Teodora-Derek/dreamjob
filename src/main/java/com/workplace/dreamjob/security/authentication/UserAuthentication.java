@@ -1,6 +1,6 @@
 package com.workplace.dreamjob.security.authentication;
 
-import com.workplace.dreamjob.security.user.AuthUser;
+import com.workplace.dreamjob.security.model.AuthUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

@@ -1,4 +1,4 @@
-package com.workplace.dreamjob.common;
+package com.workplace.dreamjob.common.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.BadRequestException;

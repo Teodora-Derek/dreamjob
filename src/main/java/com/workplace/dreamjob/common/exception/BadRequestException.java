@@ -1,10 +1,10 @@
-package com.workplace.dreamjob.common;
+package com.workplace.dreamjob.common.exception;
 
 import java.util.UUID;
 import lombok.Getter;
 
-import static com.workplace.dreamjob.common.ErrorCodes.FACTOR_ALREADY_IN_USE_UUID;
-import static com.workplace.dreamjob.common.ErrorCodes.USER_ID_NOT_EXISTS_UUID;
+import static com.workplace.dreamjob.common.exception.ErrorCodes.FACTOR_ALREADY_IN_USE_UUID;
+import static com.workplace.dreamjob.common.exception.ErrorCodes.USER_ID_NOT_EXISTS_UUID;
 
 @Getter
 public class BadRequestException extends RuntimeException {

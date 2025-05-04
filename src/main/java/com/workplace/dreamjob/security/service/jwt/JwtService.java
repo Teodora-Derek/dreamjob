@@ -7,11 +7,10 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.workplace.dreamjob.common.Role;
 import com.workplace.dreamjob.security.exception.TokenAuthenticationException;
-import com.workplace.dreamjob.security.user.AuthUser;
+import com.workplace.dreamjob.security.model.AuthUser;
 import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
 @Service

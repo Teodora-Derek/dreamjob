@@ -1,7 +1,7 @@
 package com.workplace.dreamjob.user.repository;
 
-import com.workplace.dreamjob.common.Role;
 import com.workplace.dreamjob.common.AccountStatus;
+import com.workplace.dreamjob.common.Role;
 import com.workplace.dreamjob.user.model.UserDetails;
 import java.time.Clock;
 import java.time.LocalDateTime;
@@ -75,15 +75,16 @@ public class UserRepository {
 
     private UserDetails toUserDetails(Record record) {
 
-        return new UserDetails(
-                record.get(USER_DETAILS.ID, Integer.class),
-                record.get(USER_DETAILS.USERNAME),
-                record.get(USER_DETAILS.PASSWORD_HASH, String.class),
-                record.get(USER_DETAILS.EMAIL),
-                record.get(USER_DETAILS.DISPLAY_NAME),
-                Role.ROLE_USER,
-                record.get(USER_DETAILS.STATUS, AccountStatus.class),
-                record.get(USER_DETAILS.CREATED_ON, LocalDateTime.class),
-                record.get(USER_DETAILS.UPDATED_ON, LocalDateTime.class));
+        return UserDetails.builder()
+                .userId(record.get(USER_DETAILS.ID, Integer.class))
+                .username(record.get(USER_DETAILS.USERNAME))
+                .passwordHash(record.get(USER_DETAILS.PASSWORD_HASH))
+                .email(record.get(USER_DETAILS.EMAIL))
+                .displayName(record.get(USER_DETAILS.DISPLAY_NAME))
+                .role(Role.ROLE_USER)
+                .status(record.get(USER_DETAILS.STATUS, AccountStatus.class))
+                .createdOn(record.get(USER_DETAILS.CREATED_ON, LocalDateTime.class))
+                .updatedOn(record.get(USER_DETAILS.UPDATED_ON, LocalDateTime.class))
+                .build();
     }
 }

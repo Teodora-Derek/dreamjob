@@ -1,8 +1,7 @@
-package com.workplace.dreamjob.user.service.model;
+package com.workplace.dreamjob.user.service.request;
 
 import com.workplace.dreamjob.common.AccountStatus;
-import com.workplace.dreamjob.user.api.model.PatchTraderRequest;
-import java.util.Optional;
+import com.workplace.dreamjob.user.api.request.PatchTraderRequest;
 import lombok.Builder;
 
 @Builder

@@ -1,4 +1,4 @@
-package com.workplace.dreamjob.user.api.model;
+package com.workplace.dreamjob.user.api.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.workplace.dreamjob.common.AccountStatus;

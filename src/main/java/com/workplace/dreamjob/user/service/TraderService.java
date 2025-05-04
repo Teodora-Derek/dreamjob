@@ -1,13 +1,13 @@
 package com.workplace.dreamjob.user.service;
 
 import com.workplace.dreamjob.common.AccountStatus;
-import com.workplace.dreamjob.common.BadRequestException;
+import com.workplace.dreamjob.common.exception.BadRequestException;
 import com.workplace.dreamjob.user.model.TraderDetails;
 import com.workplace.dreamjob.user.model.UserDetails;
 import com.workplace.dreamjob.user.repository.TraderRepository;
-import com.workplace.dreamjob.user.service.model.TraderCreateCommand;
-import com.workplace.dreamjob.user.service.model.TraderPatchCommand;
-import com.workplace.dreamjob.user.service.model.UserPatchCommand;
+import com.workplace.dreamjob.user.service.request.TraderCreateCommand;
+import com.workplace.dreamjob.user.service.request.TraderPatchCommand;
+import com.workplace.dreamjob.user.service.request.UserPatchCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

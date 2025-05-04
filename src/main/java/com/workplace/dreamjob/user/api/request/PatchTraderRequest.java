@@ -1,7 +1,6 @@
-package com.workplace.dreamjob.user.api.model;
+package com.workplace.dreamjob.user.api.request;
 
 import com.workplace.dreamjob.common.AccountStatus;
-import lombok.Builder;
 
 public record PatchTraderRequest(
         int traderId,

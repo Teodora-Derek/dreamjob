@@ -2,10 +2,10 @@ package com.workplace.dreamjob.user.api;
 
 import com.workplace.dreamjob.security.dto.LoginDto;
 import com.workplace.dreamjob.security.dto.TokenDto;
-import com.workplace.dreamjob.user.api.model.CreateUserRequest;
+import com.workplace.dreamjob.user.api.request.CreateUserRequest;
 import com.workplace.dreamjob.user.service.AuthService;
 import com.workplace.dreamjob.user.service.UserService;
-import com.workplace.dreamjob.user.service.model.UserCreateCommand;
+import com.workplace.dreamjob.user.service.request.UserCreateCommand;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

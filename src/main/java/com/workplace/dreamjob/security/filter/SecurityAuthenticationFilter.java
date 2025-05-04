@@ -1,10 +1,10 @@
 package com.workplace.dreamjob.security.filter;
 
-import com.workplace.dreamjob.common.AuthConstants;
+import com.workplace.dreamjob.common.constants.AuthConstants;
 import com.workplace.dreamjob.security.authentication.UserAuthentication;
 import com.workplace.dreamjob.security.exception.TokenAuthenticationException;
 import com.workplace.dreamjob.security.service.jwt.JwtService;
-import com.workplace.dreamjob.security.user.AuthUser;
+import com.workplace.dreamjob.security.model.AuthUser;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

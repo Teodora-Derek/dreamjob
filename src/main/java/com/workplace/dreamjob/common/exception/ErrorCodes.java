@@ -1,4 +1,4 @@
-package com.workplace.dreamjob.common;
+package com.workplace.dreamjob.common.exception;
 
 import java.util.UUID;
 

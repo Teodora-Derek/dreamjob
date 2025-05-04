@@ -1,6 +1,6 @@
-package com.workplace.dreamjob.security.user;
+package com.workplace.dreamjob.security.model;
 
-import com.workplace.dreamjob.common.BadRequestException;
+import com.workplace.dreamjob.common.exception.BadRequestException;
 import com.workplace.dreamjob.common.Role;
 import org.apache.commons.lang3.StringUtils;
 
