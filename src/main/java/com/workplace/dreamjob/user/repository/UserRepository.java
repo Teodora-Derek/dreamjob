@@ -1,7 +1,7 @@
 package com.workplace.dreamjob.user.repository;
 
 import com.workplace.dreamjob.common.Role;
-import com.workplace.dreamjob.user.model.AccountStatus;
+import com.workplace.dreamjob.common.AccountStatus;
 import com.workplace.dreamjob.user.model.UserDetails;
 import java.time.Clock;
 import java.time.LocalDateTime;
@@ -20,7 +20,7 @@ public class UserRepository {
     private final DSLContext dslContext;
     private final Clock clock;
 
-    public void persistUser(UserDetails userDetails) {
+    public void create(UserDetails userDetails) {
 
         LocalDateTime now = LocalDateTime.now(clock);
 
@@ -32,6 +32,17 @@ public class UserRepository {
                 .set(USER_DETAILS.STATUS, userDetails.status().name())
                 .set(USER_DETAILS.CREATED_ON, now)
                 .set(USER_DETAILS.UPDATED_ON, now)
+                .execute();
+    }
+
+    public void patch(UserDetails userDetails) {
+
+        dslContext.update(USER_DETAILS)
+                .set(USER_DETAILS.PASSWORD_HASH, userDetails.passwordHash())
+                .set(USER_DETAILS.DISPLAY_NAME, userDetails.displayName())
+                .set(USER_DETAILS.STATUS, userDetails.status().name())
+                .set(USER_DETAILS.UPDATED_ON, LocalDateTime.now(clock))
+                .where(USER_DETAILS.ID.eq(userDetails.userId()))
                 .execute();
     }
 
@@ -71,6 +82,8 @@ public class UserRepository {
                 record.get(USER_DETAILS.EMAIL),
                 record.get(USER_DETAILS.DISPLAY_NAME),
                 Role.ROLE_USER,
-                record.get(USER_DETAILS.STATUS, AccountStatus.class));
+                record.get(USER_DETAILS.STATUS, AccountStatus.class),
+                record.get(USER_DETAILS.CREATED_ON, LocalDateTime.class),
+                record.get(USER_DETAILS.UPDATED_ON, LocalDateTime.class));
     }
 }

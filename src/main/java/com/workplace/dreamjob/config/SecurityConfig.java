@@ -31,6 +31,7 @@ public class SecurityConfig {
 
     @Bean
     public PasswordEncoder encoder() {
+
         return new BCryptPasswordEncoder();
     }
 
@@ -38,11 +39,14 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.addFilterBefore(securityAuthenticationFilter, AuthorizationFilter.class)
-                .authorizeHttpRequests(matcher -> matcher.requestMatchers("/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/authentication/login", "/api/users")
-                        .permitAll().anyRequest().authenticated()).cors(Customizer.withDefaults())
-                .csrf(AbstractHttpConfigurer::disable).sessionManagement(
-                        configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(matcher -> matcher
+                        .requestMatchers("/swagger-ui.html", "/swagger-ui/**", "/swagger-resources/**",
+                                "/swagger-resources", "/v3/api-docs/**", "/proxy/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/authentication/**").permitAll()
+                        .anyRequest().authenticated())
+                .cors(Customizer.withDefaults())
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(configurer -> configurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(customizer -> customizer.accessDeniedHandler(accessDeniedHandler)
                         .authenticationEntryPoint(authenticationEntryPoint));
 
@@ -61,6 +65,7 @@ public class SecurityConfig {
     // register NoOp AuthenticationManager to avoid log printed by default autoconfiguration
     @Bean
     public AuthenticationManager noOpAuthenticationManager() {
+
         return authentication -> null;
     }
 }

@@ -1,20 +1,16 @@
-package com.workplace.dreamjob.user.model;
+package com.workplace.dreamjob.user.service.model;
 
 import com.workplace.dreamjob.common.AccountStatus;
 import com.workplace.dreamjob.common.Role;
-import java.time.LocalDateTime;
 import lombok.Builder;
 
 @Builder
-public record UserDetails(
+public record UserResponse(
         int userId,
         String username,
-        String passwordHash,
         String email,
         String displayName,
         Role role,
-        AccountStatus status,
-        LocalDateTime createdOn,
-        LocalDateTime updatedOn) {
+        AccountStatus status) {
 
 }

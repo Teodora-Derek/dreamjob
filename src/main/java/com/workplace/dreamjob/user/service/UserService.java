@@ -1,18 +1,16 @@
 package com.workplace.dreamjob.user.service;
 
+import com.workplace.dreamjob.common.AccountStatus;
 import com.workplace.dreamjob.common.BadRequestException;
 import com.workplace.dreamjob.common.NotFoundException;
 import com.workplace.dreamjob.common.Role;
 import com.workplace.dreamjob.security.exception.ApplicationAuthenticationException;
-import com.workplace.dreamjob.security.user.AuthUser;
-import com.workplace.dreamjob.user.api.model.CreateUserRequest;
-import com.workplace.dreamjob.user.api.model.UpdateUserRequest;
-import com.workplace.dreamjob.user.api.model.UserPasswordUpdateRequest;
-import com.workplace.dreamjob.user.api.model.UserResponse;
-import com.workplace.dreamjob.user.api.model.UserResponseWithCredentials;
-import com.workplace.dreamjob.user.model.AccountStatus;
 import com.workplace.dreamjob.user.model.UserDetails;
 import com.workplace.dreamjob.user.repository.UserRepository;
+import com.workplace.dreamjob.user.service.model.UserCreateCommand;
+import com.workplace.dreamjob.user.service.model.UserPatchCommand;
+import com.workplace.dreamjob.user.service.model.UserResponse;
+import com.workplace.dreamjob.user.service.model.UserResponseWithCredentials;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -25,40 +23,43 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public void createUser(CreateUserRequest createUserRequest) {
+    public UserDetails getUserDetails(int userId) {
 
-        throwIfNotValidRequest(createUserRequest);
-        String passwordHash = passwordEncoder.encode(createUserRequest.password());
+        return userRepository.findByUserId(userId)
+                .orElseThrow(() -> BadRequestException.userIdNotFound(Integer.toString(userId)));
+    }
+
+    public void createUser(UserCreateCommand command) {
+
+        throwIfNotValidRequest(command);
+        String passwordHash = passwordEncoder.encode(command.password());
 
         UserDetails userDetails = UserDetails.builder()
-                .username(createUserRequest.username())
+                .username(command.username())
                 .passwordHash(passwordHash)
-                .email(createUserRequest.email())
-                .displayName(createUserRequest.displayName())
+                .email(command.email())
+                .displayName(command.displayName())
                 .role(Role.ROLE_USER)
                 .status(AccountStatus.Active)
                 .build();
 
-        userRepository.persistUser(userDetails);
+        userRepository.create(userDetails);
     }
 
-    public void updateUser(UpdateUserRequest updateUserRequest, AuthUser authUser) {
 
-        int userId = authUser.getNumericUserId();
-        UserDetails userDetails = getUserDetails(userId);
+    public void patchUserDetails(UserPatchCommand command) {
+
+        int userId = command.userId();
+        UserDetails currentUserDetails = getUserDetails(userId);
 
         UserDetails updatedUserDetails = UserDetails.builder()
-                .username(updateUserRequest.username())
-                .passwordHash(userDetails.passwordHash())
-                .email(userDetails.email())
-                .displayName(updateUserRequest.displayName())
-                .role(Role.ROLE_USER)
-                .status(AccountStatus.Active)
+                .displayName(command.displayName() != null ? command.displayName() : currentUserDetails.displayName())
+                .passwordHash(command.password() != null ? command.password() : currentUserDetails.passwordHash())
+                .status(command.status() != null ? command.status() : currentUserDetails.status())
                 .build();
 
-        userRepository.persistUser(updatedUserDetails);
+        userRepository.patch(updatedUserDetails);
     }
-
 
     public UserResponseWithCredentials getUserCredentialsByUsername(String username) {
 
@@ -77,50 +78,44 @@ public class UserService {
         return new UserResponseWithCredentials(userResponse, userDetails.passwordHash());
     }
 
-    public void changeUserPassword(UserPasswordUpdateRequest passwordUpdateRequest, AuthUser authUser) {
+    public void changeUserPassword(
+            int userId,
+            String oldPassword,
+            String newPassword) {
 
-        UserDetails userDetails = getUserDetails(authUser.getNumericUserId());
+        UserDetails userDetails = getUserDetails(userId);
 
-        if (!passwordEncoder.matches(passwordUpdateRequest.oldPassword(), userDetails.passwordHash())) {
+        if (!passwordEncoder.matches(oldPassword, userDetails.passwordHash())) {
             throw new ApplicationAuthenticationException("Old password is incorrect");
         }
 
-        String newPasswordHash = passwordEncoder.encode(passwordUpdateRequest.newPassword());
+        String newPasswordHash = passwordEncoder.encode(newPassword);
 
         UserDetails updatedUserDetails = UserDetails.builder()
-                .username(userDetails.username())
                 .passwordHash(newPasswordHash)
-                .email(userDetails.email())
                 .displayName(userDetails.displayName())
-                .role(Role.ROLE_USER)
                 .status(AccountStatus.Active)
                 .build();
 
-        userRepository.persistUser(updatedUserDetails);
+        userRepository.patch(updatedUserDetails);
     }
 
-    private UserDetails getUserDetails(int userId) {
+    private void throwIfNotValidRequest(UserCreateCommand command) {
 
-        return userRepository.findByUserId(userId)
-                .orElseThrow(() -> new NotFoundException("No such userId exists!"));
+        throwIfUsernameIsInvalid(command.username());
+        throwIfEmailIsAlreadyUsed(command.email());
     }
 
-    private void throwIfNotValidRequest(CreateUserRequest createUserRequest) throws BadRequestException {
+    private void throwIfUsernameIsInvalid(String username) {
 
-        throwIfUsernameIsInvalid(createUserRequest);
-        throwIfEmailIsAlreadyUsed(createUserRequest);
-    }
-
-    private void throwIfUsernameIsInvalid(CreateUserRequest createUserRequest) {
-
-        if (!StringUtils.isAsciiPrintable(createUserRequest.username())) {
+        if (!StringUtils.isAsciiPrintable(username)) {
             throw new BadRequestException("Username is not in ASCII format!");
         }
     }
 
-    private void throwIfEmailIsAlreadyUsed(CreateUserRequest createUserRequest) {
+    private void throwIfEmailIsAlreadyUsed(String email) {
 
-        userRepository.findByEmail(createUserRequest.email()).ifPresent(user -> {
+        userRepository.findByEmail(email).ifPresent(user -> {
             throw BadRequestException.factorAlreadyInUse("", String.valueOf(user.userId()));
         });
     }

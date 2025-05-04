@@ -1,4 +1,4 @@
-package com.workplace.dreamjob.user.model;
+package com.workplace.dreamjob.common;
 
 public enum AccountStatus {
     Active,

@@ -8,11 +8,11 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.workplace.dreamjob.common.Role;
 import com.workplace.dreamjob.security.exception.TokenAuthenticationException;
 import com.workplace.dreamjob.security.user.AuthUser;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
 import java.util.Date;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Service;
 
 @Service
 public class JwtService {
@@ -31,12 +31,13 @@ public class JwtService {
     }
 
     public AuthUser resolveJwtToken(String token) {
+
         try {
             JWTVerifier verifier = JWT.require(signingAlgorithm).build();
             DecodedJWT decodedJWT = verifier.verify(token);
 
             String userId = decodedJWT.getSubject();
-            Role role = decodedJWT.getClaim(ROLES_CLAIM).as(Role.class);
+            Role role = decodedJWT.getClaim(ROLES_CLAIM).asList(Role.class).get(0);
 
             return new AuthUser(userId, role);
         } catch (JWTVerificationException exception) {
@@ -45,6 +46,7 @@ public class JwtService {
     }
 
     public String createJwtToken(AuthUser authUser) {
+
         long nowMillis = System.currentTimeMillis();
         Date now = new Date(nowMillis);
         long expMillis = nowMillis + expirationTime; // 1 hour validity

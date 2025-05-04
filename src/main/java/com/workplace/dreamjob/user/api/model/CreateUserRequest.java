@@ -6,7 +6,6 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.Builder;
 
-@Builder
 public record CreateUserRequest(
 
         @Size(min = 3, max = 20, message = "Username must be between 3 and 20 characters") @Pattern(
